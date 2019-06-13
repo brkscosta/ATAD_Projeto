@@ -3,7 +3,7 @@
 #include "patient.h"
 
 /* definicao do tipo da chave */
-typedef int MapKey;
+typedef String MapKey;
 
 /* definicao do tipo do valor*/
 typedef Patient MapValue;

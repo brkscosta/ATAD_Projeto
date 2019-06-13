@@ -12,7 +12,7 @@
 #include <locale.h>
 #include<conio.h>
 #include "util.h"
-
+#include "map.h"
 typedef char String[255];
 
 /* definicao de prototipos de funcoes, definidas depois do main() */
@@ -57,6 +57,11 @@ int main(int argc, char** argv) {
 			sort(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
+			/*PtMap map = mapCreate(20);
+			ListElem e;
+			listGet(listPatients, 0, &e);
+			mapPut(map, "Pinhal Novo", e);
+			mapPrint(map);*/
 			printf("Comando AVG nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {

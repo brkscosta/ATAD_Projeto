@@ -10,14 +10,7 @@ typedef struct keyValue {
 } KeyValue;
 
 typedef struct mapImpl {
-	/* Abordagem 1:*/
-	//MapKey *keys;
-	//MapValue *values;
-
-	/* Abordagem 2:*/
 	KeyValue *elements;
-
-	/*-------------- */
 	unsigned int size;
 	unsigned int capacity;
 } MapImpl;
@@ -107,11 +100,15 @@ int mapPut(PtMap map, MapKey key, MapValue value) {
 	}
 	else {
 		if (map->size == map->capacity) {
-			//TODO: modificar para aumentar dinamicamente o array
-			return MAP_FULL;
-		}
+			KeyValue *newElements = (KeyValue*)realloc(map->elements,
+				(map->capacity + 1) * sizeof(KeyValue));
 
-		map->elements[map->size].key = key;
+			if (newElements == NULL) return MAP_NO_MEMORY;
+			map->elements = newElements;
+			map->capacity += 1;
+		}
+		strcpy_s(map->elements[map->size].key, sizeof(map->elements[map->size].key), key);
+		//map->elements[map->size].key = key;
 		map->elements[map->size].value = value;
 		map->size++;
 		return MAP_OK;
@@ -179,7 +176,7 @@ MapKey* mapKeys(PtMap map) {
 	MapKey *keys = (MapKey*)calloc(map->size, sizeof(MapKey));
 
 	for (int i = 0; i < map->size; i++) {
-		keys[i] = map->elements[i].key;
+		strcpy_s(keys[i], sizeof(keys[i]), map->elements[i].key);
 	}
 
 	return keys;

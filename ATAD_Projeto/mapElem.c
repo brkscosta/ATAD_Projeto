@@ -1,16 +1,20 @@
 #include "mapElem.h"
 
 void mapKeyPrint(MapKey key) {
-	printf("%d \n", key);
+	printf("%s \n", key);
 }
 
 void mapValuePrint(MapValue value) {
-	itemPrint(&value);
+	printf("media dos dados clinicos por distrito\n");
 }
 
 /* funcao de comparacao de chaves */
 int mapKeyEquals(MapKey key1, MapKey key2) {
 	//no caso de MapKey == int. Alterar de acordo
 	//com o tipo efetivo
-	return (key1 == key2);
+	/*int result_strcmp = strcmp(key1, key2);
+	if (result_strcmp == 0) {
+		return -1;
+	}*/
+	return  strcmp(key1, key2);
 }
