@@ -5,7 +5,7 @@ void mapKeyPrint(MapKey key) {
 }
 
 void mapValuePrint(MapValue value) {
-	printf("media dos dados clinicos por distrito\n");
+	clinicalataStatisticsPrint(&value);
 }
 
 /* funcao de comparacao de chaves */

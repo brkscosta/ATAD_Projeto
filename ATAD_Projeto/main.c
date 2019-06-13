@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 			show(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			sort(listPatients);
+			sort(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
 			/*PtMap map = mapCreate(20);

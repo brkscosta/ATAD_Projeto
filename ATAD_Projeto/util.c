@@ -268,7 +268,6 @@ void loadt(PtList *patients) {
 
 void sort(PtList *patients) {
 	clrscr();
-	int size;
 	char command[20];
 	int option;
 	int quit = 0;
@@ -282,14 +281,7 @@ void sort(PtList *patients) {
 	printf("3- District\n");
 	printf("4- To return to the home menu\n\n");
 
-	listSize(patients, &size);
-	PtList auxiliar = listCreate(size);
-	ListElem patient;
-	for (int i = 0; i < size; i++) {
-		listGet(patients, i, &patient);
-		listAdd(auxiliar, i, patient);
-	}
-
+	PtList auxiliar = copyData(*patients);
 
 	do {
 		printf("COMMAND> ");
@@ -298,15 +290,15 @@ void sort(PtList *patients) {
 		option = atoi(command);
 
 		if (option == 1) {
-			sortByBirthdate(auxiliar, size);
+			sortByBirthdate(auxiliar);
 			quit = 1;
 		}
 		else if (option == 2) {
-			sortByHospital(auxiliar, size);
+			sortByHospital(auxiliar);
 			quit = 1;
 		}
 		else if (option == 3) {
-			sortByDistrict(auxiliar, size);
+			sortByDistrict(auxiliar);
 			quit = 1;
 		}
 		else if (option == 4) {
@@ -321,6 +313,10 @@ void sort(PtList *patients) {
 	listDestroy(&auxiliar);
 	system("pause");
 	clrscr();
+
+}
+
+void avg(PtList patients) {
 
 }
 
@@ -383,7 +379,9 @@ int findPatientRankById(PtList *patient, int patientId) {
 	return -1;
 }
 
-void sortByBirthdate(PtList patients, int size) {
+void sortByBirthdate(PtList patients) {
+	int size;
+	listSize(patients, &size);
 	ListElem patient1, patient2;
 
 	for (int i = 0; i < size; i++) {
@@ -420,7 +418,10 @@ int compareBirthdate(ListElem patient1, ListElem patient2) {
 	return -1;
 }
 
-void sortByHospital(PtList patients, int size) {
+void sortByHospital(PtList patients) {
+	int size;
+	listSize(patients, &size);
+
 	ListElem patient1, patient2;
 
 
@@ -465,7 +466,9 @@ int compareHospital(ListElem patient1, ListElem patient2) {
 	}
 }
 
-void sortByDistrict(PtList patients, int size) {
+void sortByDistrict(PtList patients) {
+	int size;
+	listSize(patients, &size);
 	ListElem patient1, patient2;
 
 	for (int i = 0; i < size; i++) {
@@ -514,4 +517,16 @@ void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, List
 
 	listSet(patients, rank2, patient1, &patient2);
 	listSet(patients, rank1, patient2, &temp);
+}
+
+PtList copyData(PtList list) {
+	int size;
+	listSize(list, &size);
+	PtList newList = listCreate(size);
+	ListElem patient;
+	for (int i = 0; i < size; i++) {
+		listGet(list, i, &patient);
+		listAdd(newList, i, patient);
+	}
+	return newList;
 }

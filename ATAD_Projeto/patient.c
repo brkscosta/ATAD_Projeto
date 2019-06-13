@@ -58,4 +58,9 @@ void patientPrint(Patient patient) {
 
 }
 
+ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, float avgGlucose, float avgInsulin, float avgMcp1) {
 
+}
+void clinicalataStatisticsPrint(ClinicalDataStatistics *ClinicalDataStatistics) {
+
+}
