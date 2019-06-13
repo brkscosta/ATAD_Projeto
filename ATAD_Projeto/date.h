@@ -5,5 +5,4 @@ typedef struct date {
 }Date;
 
 Date dateCreate(unsigned int day, unsigned int month, unsigned int year);
-Date dateRead();
 void datePrint(Date *ptrDate);

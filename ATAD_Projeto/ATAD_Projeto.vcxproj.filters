@@ -59,16 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="clinicalData.csv">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="clinicalData_train.csv">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="patients.csv">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="patients_train.csv">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="patients.csv">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

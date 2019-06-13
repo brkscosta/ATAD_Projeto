@@ -1,7 +1,7 @@
 ﻿/* PROJETO  ATAD 2018-19
 * Identificacao dos Alunos:
 *
-*      Numero: ######### | Nome: ###############################
+*      Numero: 180221109 | Nome: Joanã Santos da Costa
 *      Numero: 180221070 | Nome: Rafael Trindade
 *
 */
@@ -18,7 +18,6 @@ typedef char String[255];
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
 void printCommandsMenu();
-void clrscr();
 //...
 
 /*
@@ -27,7 +26,7 @@ void clrscr();
 int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
-
+	PtList listPatients = listCreate(500);
 	/* interpretador de comandos */
 	String command;
 	int quit = 0;
@@ -46,17 +45,16 @@ int main(int argc, char** argv) {
 		else if (equalsStringIgnoreCase(command, "LOAD")) {
 			/* invocação da função responsável pela respetiva
 			funcionalidade. Remover printf seguinte após implementação */
-			clrscr();
-			load("patients.csv");
+			load(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
-			printf("Comando CLEAR nao implementado.\n");
+			clear(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "SHOW")) {
-			printf("Comando SHOW nao implementado.\n");
+			show(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			printf("Comando SORT nao implementado.\n");
+			sort(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
 			printf("Comando AVG nao implementado.\n");
@@ -71,7 +69,7 @@ int main(int argc, char** argv) {
 			printf("Comando CHECKDISTRICT nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
-			printf("Comando MFOULG nao implementado.\n");
+			loadt(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
 			printf("Comando NORMT nao implementado.\n");
@@ -81,11 +79,13 @@ int main(int argc, char** argv) {
 		}
 		else {
 			clrscr();
-			printf("\033[0;31m Comando não encontrado.\n");
+			printf("\033[0;31m Command not found.\n");
 			printf("\033[0m");
 		}
 	}
+
 	/* libertar memória e apresentar mensagem de saída. */
+	listDestroy(&listPatients);
 	return (EXIT_SUCCESS);
 }
 

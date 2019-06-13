@@ -2,36 +2,59 @@
 #include <stdlib.h>
 #include "patient.h"
 
-Patient patientCreate(int id, Date birthdate, char gender, String hospital, String district, ClinicalData clinicalData)
+
+Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char *district)
 {
 	Patient newPatient;
 	newPatient.id = id;
 	newPatient.birthdate = birthdate;
 	newPatient.gender = gender;
-	strcpy_s(newPatient.hospital, 256, hospital);
-	strcpy_s(newPatient.district, 256, district);
-	//newPatient.clinicalData = clinicalData;
+	strcpy_s(newPatient.hospital, sizeof(newPatient.hospital), hospital);
+	strcpy_s(newPatient.district, sizeof(newPatient.district), district);
+
+	ClinicalData newClinicalData;
+	newClinicalData.age = 0;
+	newClinicalData.bmi = 0;
+	newClinicalData.glucose = 0;
+	newClinicalData.insulin = 0;
+	newClinicalData.mcp1 = 0;
+	newClinicalData.disease_type = 0;
+	newClinicalData.clinicalDataCount = 0;
+
+	newPatient.clinicalData = newClinicalData;
+
 	return newPatient;
 
 }
 
-int addClinicalDataToPatient(PtPatient patient, ClinicalData clinicalData)
-{
-	return 0;
-}
-
 void patientPrint(Patient patient) {
-	printf("ID: %d|Data de nascimento(dd/mm/yy): %d-%d-%d | Genero: %c | Hospital: %s | Distrito: %s |\n",
+	//printf("%3d \t %d-%d-%d \b %c \b %-35s \t %-15s %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t",
+	/*printf("%3d\t%d/%d/%d \t %c\t%-35s\t%s",
 		patient.id,
 		patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
-		patient.gender, patient.hospital, patient.district);
-	printf("Dados clinicos do doente(medias)");
+		patient.gender,
+		patient.hospital,
+		patient.district);
+	printf("\t\tClinical Data\n \t\tAge:%.1f\tBmi:%.2f\tGlicose:%.1f\tInsulin:%.1f\tMcp1:%.1f\n",
+		patient.clinicalData.age,
+		patient.clinicalData.bmi,
+		patient.clinicalData.glucose,
+		patient.clinicalData.insulin,
+		patient.clinicalData.mcp1);*/
 
-
-	/*printf("Idade media: %d \n BMI: %f \n Glicose (mg/dl): %f \n Insulina (µU/ml): %f \n Proteina MCP-1 (pg/ml): %f \n  Classificacao do Doente: %d \n Nº Consultas: %d \n",
-		patient.clinicalData.age, patient.clinicalData.bmi,
-		patient.clinicalData.glucose, patient.clinicalData.insulin,
-		patient.clinicalData.mcp1, patient.clinicalData.disease_type, patient.clinicalData.clinicalDataCount);*/
+	printf("%3d    %02d/%02d/%02d    %c %-35s    %s    %.2f",
+		patient.id,
+		patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
+		patient.gender,
+		patient.hospital,
+		patient.district, patient.clinicalData.age);
+	/*printf("\t\tClinical Data\n \t\tAge:%.1f\tBmi:%.2f\tGlicose:%.1f\tInsulin:%.1f\tMcp1:%.1f\n",
+		patient.clinicalData.age,
+		patient.clinicalData.bmi,
+		patient.clinicalData.glucose,
+		patient.clinicalData.insulin,
+		patient.clinicalData.mcp1);
+*/
 
 }
 

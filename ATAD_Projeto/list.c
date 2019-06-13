@@ -225,9 +225,11 @@ void listPrint(PtList list) {
 	else if ( /*listIsEmpty(list)*/ list->size == 0)
 		printf("LIST EMPTY \n");
 	else {
+		printf("\t\tIndice\tBirthDate\tSex\tHospital\t\t\t\tDistrict\n\n");
 		for (int rank = 0; rank < list->size; rank++) {
-			printf("Rank %d : ", rank);
+			printf("At rank    %3d:\t", rank);
 			listElemPrint(list->elements[rank]);
+			printf("\n================================================================================================\n");
 		}
 
 	}
