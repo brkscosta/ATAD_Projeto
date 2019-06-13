@@ -21,9 +21,6 @@
     <ClCompile Include="patient.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clinicalData.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="date.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,12 +33,15 @@
     <ClCompile Include="util.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mapElem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="patient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clinicalData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="date.h">
@@ -54,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapElem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

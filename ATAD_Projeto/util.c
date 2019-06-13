@@ -445,6 +445,7 @@ void sortByHospital(PtList patients, int size) {
 		swapPatients(patients, indexMin, i, patient1, patient2);
 	}
 }
+
 int compareHospital(ListElem patient1, ListElem patient2) {
 	//Return -1 se o Hospital 1 é menor que Hospital 2
 	//Return  1 se o Hospital 2 é menor que Hospital 1

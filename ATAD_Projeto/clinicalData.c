@@ -1,5 +1,0 @@
-﻿#include <stdio.h>
-#include <stdlib.h>
-#include "clinicalData.h"
-
-

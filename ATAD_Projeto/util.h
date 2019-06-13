@@ -51,6 +51,7 @@ Recebe:
 Lista de pacientes(patients), size da lista (size)
 */
 void sortByBirthdate(PtList patients, int size);
+
 /*
 Compara datas de nascimento dos 2 pacientes
 Recebe:

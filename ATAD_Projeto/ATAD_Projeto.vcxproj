@@ -115,19 +115,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clinicalData.c" />
     <ClCompile Include="date.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="listElem.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="map.c" />
+    <ClCompile Include="mapElem.c" />
     <ClCompile Include="patient.c" />
     <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clinicalData.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="listElem.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="mapElem.h" />
     <ClInclude Include="patient.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
