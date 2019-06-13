@@ -19,7 +19,7 @@ char** split(char* str, int nFields, const char *delim);
 /*
 Devolve a idade do paciente
 Recebe:
-data de nascimento e a data da consulta
+Data de nascimento e a data da consulta
 Retorno:
 Idade
 */
@@ -38,7 +38,7 @@ int findPatientRankById(PtList *patient, int patientId);
 /*
 Calcular valor medio
 Recebe:
-avg � a media com n elementos, o v � o novo elemento, e o n a posi��o
+avg é a media com n elementos, o v é o novo elemento, e o n a posição
 Retorno:
 Valor medio
 */
@@ -56,15 +56,15 @@ Compara datas de nascimento dos 2 pacientes
 Recebe:
 2 pacientes patient1, patient2
 Retorno:
--1 se o data 1 � menor que data 2
- 1 se o data 2 � menor que data 1
+-1 se o data 1 é menor que data 2
+ 1 se o data 2 é menor que data 1
 */
 int compareBirthdate(ListElem patient1, ListElem patient2);
 
 
 /*
 Ordena de forma crescente por Hospital
-em caso de desempate ordena pela data de nascimento
+Em caso de desempate ordena pela data de nascimento
 Recebe:
 Lista de pacientes(patients), size da lista (size)
 */
@@ -75,16 +75,16 @@ Compara hospitais dos 2 pacientes
 Recebe:
 2 pacientes patient1, patient2
 Retorno:
--1 se o hospital 1 � menor que hospital 2
- 1 se o hospital 2 � menor que hospital 1
- 0 se o hospital 1 � igual que hospital 2
+-1 se o hospital 1 é menor que hospital 2
+ 1 se o hospital 2 é menor que hospital 1
+ 0 se o hospital 1 é igual que hospital 2
 */
 int compareHospital(ListElem patient1, ListElem patient2);
 
 
 /*
 Ordena de forma crescente por Distrito
-em caso de desempate ordena por hospital
+Em caso de desempate ordena por hospital
 Recebe:
 Lista de pacientes(patients), size da lista (size)
 */
@@ -95,9 +95,9 @@ Compara distritos dos 2 pacientes
 Recebe:
 2 pacientes patient1, patient2
 Retorno:
--1 se o distrito 1 � menor que distrito 2
- 1 se o distrito 2 � menor que distrito 1
- 0 se o distrito 1 � igual que distrito 2
+-1 se o distrito 1 é menor que distrito 2
+ 1 se o distrito 2 é menor que distrito 1
+ 0 se o distrito 1 é igual que distrito 2
 */
 int compareDistrict(ListElem patient1, ListElem patient2);
 
