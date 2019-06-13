@@ -3,68 +3,6 @@
 #include <string.h>
 #include "util.h"
 
-
-void clrscr()
-{
-	system("@cls||clear");
-}
-
-char** split(char *string, int nFields, const char *delim) {
-
-	char **tokens = malloc(sizeof(char*) * nFields);
-
-	int index = 0;
-	char *next_token = NULL; //para controlo interno da fun��o strtok_s
-
-	char *token = (char*)strtok_s(string, delim, &next_token);
-
-	while (token) {
-		tokens[index++] = token;
-		token = strtok_s(NULL, delim, &next_token);
-	}
-	return tokens;
-}
-
-float getAge(Date date1, Date date2) {
-	int age;
-	age = date2.year - date1.year;
-
-	if (date2.month < date1.month) {
-		return age - 1;
-
-	}
-	else if (date2.day < date1.day)
-	{
-		return age - 1;
-	}
-
-	return age;
-}
-
-float updateClinicalData(float avg, float v, int n) {
-	float value;
-
-	value = ((avg * n) + v) / (n + 1);
-
-	return value;
-}
-
-int findPatientRankById(PtList *patient, int patientId) {
-	int size;
-	ListElem patientElem;
-	listSize(patient, &size);
-
-	for (int i = 0; i < size; i++) {
-		listGet(patient, i, &patientElem);
-		if (patientElem.id == patientId) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-
-
 void load(PtList *patients) {
 	clrscr();
 	printf("\n===================================================================================");
@@ -208,7 +146,6 @@ void clear(PtList patients) {
 	clrscr();
 }
 
-//RETIRAR \N DO FICHEIRO
 void loadt(PtList *patients) {
 	clrscr();
 	printf("\n===================================================================================");
@@ -267,7 +204,7 @@ void loadt(PtList *patients) {
 		int day, month, year;
 		sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
 		char gender = tokens[2][0];
-
+		tokens[4][strlen(tokens[4]) - 1] = '\0';
 		ListElem patient = patientCreate(
 			id, dateCreate(day, month, year), gender, tokens[3], tokens[4]);
 		listAdd(*patients, countPatient, patient);
@@ -385,6 +322,65 @@ void sort(PtList *patients) {
 	system("pause");
 	clrscr();
 
+}
+
+void clrscr()
+{
+	system("@cls||clear");
+}
+
+char** split(char *string, int nFields, const char *delim) {
+
+	char **tokens = malloc(sizeof(char*) * nFields);
+
+	int index = 0;
+	char *next_token = NULL; //para controlo interno da fun��o strtok_s
+
+	char *token = (char*)strtok_s(string, delim, &next_token);
+
+	while (token) {
+		tokens[index++] = token;
+		token = strtok_s(NULL, delim, &next_token);
+	}
+	return tokens;
+}
+
+float getAge(Date date1, Date date2) {
+	int age;
+	age = date2.year - date1.year;
+
+	if (date2.month < date1.month) {
+		return age - 1;
+
+	}
+	else if (date2.day < date1.day)
+	{
+		return age - 1;
+	}
+
+	return age;
+}
+
+float updateClinicalData(float avg, float v, int n) {
+	float value;
+
+	value = ((avg * n) + v) / (n + 1);
+
+	return value;
+}
+
+int findPatientRankById(PtList *patient, int patientId) {
+	int size;
+	ListElem patientElem;
+	listSize(patient, &size);
+
+	for (int i = 0; i < size; i++) {
+		listGet(patient, i, &patientElem);
+		if (patientElem.id == patientId) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 void sortByBirthdate(PtList patients, int size) {
@@ -512,9 +508,9 @@ int compareDistrict(ListElem patient1, ListElem patient2) {
 	}
 }
 
-void swapPatients(PtList patients, int rank1, int rank2, ListElem patient, ListElem patient2) {
+void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, ListElem patient2) {
 	ListElem temp;
 
-	listSet(patients, rank2, patient, &patient2);
+	listSet(patients, rank2, patient1, &patient2);
 	listSet(patients, rank1, patient2, &temp);
 }
