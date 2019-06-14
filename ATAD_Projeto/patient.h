@@ -49,7 +49,7 @@ typedef struct clinicalData *PtClinicalData;
 
 typedef struct patient * PtPatient;
 
-typedef struct clinicalDataStatistics * PtClinicalDataStatistics;
+typedef struct clinicalataStatistics * PtClinicalDataStats;
 
 /*
 Construtor para o paciente
@@ -76,7 +76,7 @@ A média dos dados: Age, BMI, Glucose, Insulina, MCP1
 Retorna:
 Objeto das estatíscas dos dados clíinicos
 */
-ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, float avgGlucose, float avgInsulin, float avgMcp1);
+ClinicalDataStats clinicalDataStatsCreate();
 
 
 /*
@@ -86,4 +86,4 @@ Os dados clínicos
 Retorna:
 ----------
 */
-void clinicalDataStatisticsPrint(ClinicalDataStatistics *clinicalDataStatistics);
+void clinicalDataStatsPrint(ClinicalDataStats *clinicalDataStats);

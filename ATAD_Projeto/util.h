@@ -13,8 +13,7 @@ void sort(PtList *patients);
 void avg(PtList patients);
 void averageClinicalData(PtList patients, PtMap *map);
 
-void averageClinicalData(PtList patients);
-
+void checkDistrict(PtList patients);
 void statsMinMaxAge(PtList list);
 
 //FUNCOES AUXILIARES

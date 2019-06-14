@@ -5,7 +5,7 @@ void mapKeyPrint(MapKey key) {
 }
 
 void mapValuePrint(MapValue value) {
-	ClinicalDataStatsPrint(&value);
+	clinicalDataStatsPrint(&value);
 }
 
 /* funcao de comparacao de chaves */

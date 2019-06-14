@@ -322,44 +322,13 @@ void avg(PtList patients) {
 	printf("\n                             AVG                                                   ");
 	printf("\n===================================================================================\n");
 
-	//TODO:
-}
+	PtMap map = mapCreate(490);
 
-
-void checkDistrict(PtList patients) {
-	
-	clrscr();
-	char command[20];
-	int option;
-	int quit = 0;
-	printf("\n===================================================================================");
-	printf("\n                             CHECKDISTRICT                                         ");
-	printf("\n===================================================================================\n");
-
-	//TODO:
-	PtMap map = mapCreate(20);
-
-	do {
-		printf("COMMAND> ");
-		fgets(command, sizeof(command), stdin);
-		command[strlen(command) - 1] = '\0';
-		//option = atoi(command);
-		
-		if (mapContains(map, command) == 1) {
-			print("Faz coisas");
-			quit = 1;
-		} else {
-			printf("\033[0;31m Localidade nao encontrada.\n");
-			printf("\033[0m");
-		}
-	int size;
-	listSize(patients, &size);
 	sortByDistrict(patients);
-	PtMap map = mapCreate(size);
 	averageClinicalData(patients, &map);
 	mapPrint(map);
-	system("pause");
 	mapDestroy(&map);
+
 }
 
 void averageClinicalData(PtList patients, PtMap *map) {
@@ -376,7 +345,7 @@ void averageClinicalData(PtList patients, PtMap *map) {
 		strcpy_s(key, sizeof(key), patient.district);
 
 		if (!mapContains(*map, key)) {
-			clinicalDataStats = ClinicalDataStatsCreate();
+			clinicalDataStats = clinicalDataStatsCreate();
 			clinicalDataStats.avgAge = calculateAVG(clinicalDataStats.avgAge, patient.clinicalData.age, clinicalDataStats.patientCount);
 			clinicalDataStats.avgBmi = calculateAVG(clinicalDataStats.avgBmi, patient.clinicalData.bmi, clinicalDataStats.patientCount);
 			clinicalDataStats.avgGlucose = calculateAVG(clinicalDataStats.avgGlucose, patient.clinicalData.glucose, clinicalDataStats.patientCount);
@@ -396,15 +365,38 @@ void averageClinicalData(PtList patients, PtMap *map) {
 			value.patientCount++;
 			mapPut(*map, key, value);
 		}
-
-
-
-
-
 	}
 }
+
+void checkDistrict(PtList patients) {
+
+	clrscr();
+	char command[20];
+	int option;
+	int quit = 0;
+	printf("\n===================================================================================");
+	printf("\n                             CHECKDISTRICT                                         ");
+	printf("\n===================================================================================\n");
+
+	//TODO:
+	PtMap map = mapCreate(20);
+	do {
+		printf("COMMAND> ");
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
+		//option = atoi(command);
+
+		if (mapContains(map, command) == 1) {
+			print("Faz coisas");
+			quit = 1;
+		}
+		else {
+			printf("\033[0;31m Localidade nao encontrada.\n");
+			printf("\033[0m");
+		}
+
 	} while (quit != 1);
-	
+
 	mapPrint(map);
 	mapDestroy(map);
 	system("pause");
@@ -622,12 +614,12 @@ PtList copyData(PtList list) {
 	return newList;
 }
 
-void statsMinMaxAge(PtList list, ClinicalDataStatistics minValues, ClinicalDataStatistics maxValues) {
+void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues) {
 
 	unsigned int size;
 	listSize(list, &size);
 	ListElem elem;
-	
+
 	listGet(list, 0, &elem);
 
 	minValues.avgAge = elem.clinicalData.age;
@@ -647,5 +639,33 @@ void statsMinMaxAge(PtList list, ClinicalDataStatistics minValues, ClinicalDataS
 		}
 
 	}
-	
+
+}
+
+void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues) {
+
+	unsigned int size;
+	listSize(list, &size);
+	ListElem elem;
+
+	listGet(list, 0, &elem);
+
+	minValues.avgAge = elem.clinicalData.age;
+	maxValues.avgAge = elem.clinicalData.age;
+
+	for (int i = 0; i < size; i++) {
+
+		listGet(list, i, &elem);
+
+		if (elem.clinicalData.age <= minValues.avgAge || elem.clinicalData.age <= maxValues.avgAge) {
+			minValues.avgAge = elem.clinicalData.age;
+			maxValues.avgAge = elem.clinicalData.age;
+
+			//TODO
+
+
+		}
+
+	}
+
 }

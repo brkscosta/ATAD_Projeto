@@ -6,7 +6,11 @@
 typedef String MapKey;
 
 /* definicao do tipo do valor*/
+
 typedef ClinicalDataStats MapValue;
+
+typedef ClinicalDataStats MapValue;
+
 
 void mapKeyPrint(MapKey key);
 void mapValuePrint(MapValue value);
