@@ -51,9 +51,39 @@ typedef struct patient * PtPatient;
 
 typedef struct clinicalDataStatistics * PtClinicalDataStatistics;
 
+/*
+Construtor para o paciente
+Recebe:
+ID, Data Nascimento, Sexo, hospital, distrito
+Retorna:
+Paciente
+*/
 Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char *district);
+
+/*
+Mostra os dados do paciente
+Recebe:
+patient: Estrututa do tipo Paciente
+Retorna:
+ -------
+*/
 void patientPrint(Patient patient);
 
-ClinicalDataStats ClinicalDataStatsCreate();
+/*
+Construtor para os dados clínicos
+Recebe:
+A média dos dados: Age, BMI, Glucose, Insulina, MCP1
+Retorna:
+Objeto das estatíscas dos dados clíinicos
+*/
+ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, float avgGlucose, float avgInsulin, float avgMcp1);
 
-void ClinicalDataStatsPrint(ClinicalDataStats *ClinicalDataStat);
+
+/*
+Mostra a média dos dados clínicos
+Recebe:
+Os dados clínicos
+Retorna:
+----------
+*/
+void clinicalDataStatisticsPrint(ClinicalDataStatistics *clinicalDataStatistics);

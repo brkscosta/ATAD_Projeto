@@ -318,6 +318,40 @@ void sort(PtList *patients) {
 }
 
 void avg(PtList patients) {
+	printf("\n===================================================================================");
+	printf("\n                             AVG                                                   ");
+	printf("\n===================================================================================\n");
+
+	//TODO:
+}
+
+
+void checkDistrict(PtList patients) {
+	
+	clrscr();
+	char command[20];
+	int option;
+	int quit = 0;
+	printf("\n===================================================================================");
+	printf("\n                             CHECKDISTRICT                                         ");
+	printf("\n===================================================================================\n");
+
+	//TODO:
+	PtMap map = mapCreate(20);
+
+	do {
+		printf("COMMAND> ");
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
+		//option = atoi(command);
+		
+		if (mapContains(map, command) == 1) {
+			print("Faz coisas");
+			quit = 1;
+		} else {
+			printf("\033[0;31m Localidade nao encontrada.\n");
+			printf("\033[0m");
+		}
 	int size;
 	listSize(patients, &size);
 	sortByDistrict(patients);
@@ -368,6 +402,13 @@ void averageClinicalData(PtList patients, PtMap *map) {
 
 
 	}
+}
+	} while (quit != 1);
+	
+	mapPrint(map);
+	mapDestroy(map);
+	system("pause");
+	clrscr();
 }
 
 void clrscr()
@@ -579,4 +620,32 @@ PtList copyData(PtList list) {
 		listAdd(newList, i, patient);
 	}
 	return newList;
+}
+
+void statsMinMaxAge(PtList list, ClinicalDataStatistics minValues, ClinicalDataStatistics maxValues) {
+
+	unsigned int size;
+	listSize(list, &size);
+	ListElem elem;
+	
+	listGet(list, 0, &elem);
+
+	minValues.avgAge = elem.clinicalData.age;
+	maxValues.avgAge = elem.clinicalData.age;
+
+	for (int i = 0; i < size; i++) {
+
+		listGet(list, i, &elem);
+
+		if (elem.clinicalData.age <= minValues.avgAge || elem.clinicalData.age <= maxValues.avgAge) {
+			minValues.avgAge = elem.clinicalData.age;
+			maxValues.avgAge = elem.clinicalData.age;
+
+			//TODO
+
+
+		}
+
+	}
+	
 }
