@@ -3,6 +3,7 @@
 #include "list.h"
 #include "map.h"
 
+
 //FUNCOES DO PROJETO
 void load(PtList *patient);
 void loadt(PtList *patient);
@@ -12,6 +13,9 @@ void sort(PtList *patients);
 void avg(PtList patients);
 
 void averageClinicalData(PtList patients);
+
+void statsMinMaxAge(PtList list);
+
 //FUNCOES AUXILIARES
 
 void clrscr();
