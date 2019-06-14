@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Outputs">
+      <UniqueIdentifier>{aade0079-bfa8-4fa1-9349-a070c3939d37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -39,6 +42,12 @@
     <ClCompile Include="map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="queue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="queueElem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="patient.h">
@@ -62,6 +71,12 @@
     <ClInclude Include="map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="queueElem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="clinicalData.csv">
@@ -76,5 +91,34 @@
     <None Include="patients.csv">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ATAD1819_ProjetoFinal.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Outputs\res_avg.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_checkdistrict.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_load.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_show.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_sort_birthdate.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_sort_district_hospital.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_sort_hospital_birthdate.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
+    <Text Include="Outputs\res_queue.txt">
+      <Filter>Resource Files\Outputs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

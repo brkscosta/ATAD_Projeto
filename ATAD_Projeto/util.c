@@ -429,6 +429,77 @@ void checkDistrict(PtList patients) {
 	clrscr();
 }
 
+void queue(PtList patientsList, PtQueue queuePatients) {
+
+	clrscr();
+	char command[20];
+	int quit = 0;
+	int size;
+	printf("\n===================================================================================");
+	printf("\n                             QUEUE                                                  ");
+	printf("\n===================================================================================\n");
+	printf("Select command\n");
+	printf("next\n");
+	printf("stop\n");
+
+	queueSize(queuePatients, &size);
+	addToQueueStatsMinMaxAge(patientsList, size, queuePatients);
+	
+	do {
+		
+		printf("COMMAND> ");
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
+
+		if (strcmp(command, "next") == 0) {
+			int res = nextCommand(queuePatients);
+
+			if (res == 0) {
+				printf("\033[0;31m A fila está vazia.\n");
+				printf("\033[0m");
+				system("pause");
+				quit != 0;
+			}
+
+			//queuePrint(queue);
+		} else if (command == "stop") {
+			printf("Terminando processo...\n\n");
+			system("pause");
+			quit = 1;
+			queueDestroy(queuePatients);
+		}
+		else {
+			printf("\033[0;31m Comando not valid.\n");
+			printf("\033[0m");
+		}
+
+	} while (quit != 1);
+	
+	queueDestroy(queuePatients);
+	clrscr();
+}
+
+int nextCommand(PtQueue patients) {
+	
+	ListElem patient;
+	if (!queueIsEmpty(patients)) {
+		//Busca o que está em primeiro
+		queuePeek(patients, &patient);
+
+		//Devolve o paciente
+		patientPrint(patient);
+
+		//Retira-o da fila
+		queueDequeue(patients, &patient);
+
+		return 1;
+	}
+
+	return 0;
+}
+
+
+
 void clrscr()
 {
 	system("@cls||clear");
@@ -640,29 +711,33 @@ PtList copyPtList(PtList list) {
 	return newList;
 }
 
-void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues) {
+void addToQueueStatsMinMaxAge(PtList list, PtQueue queue) {
+	
+	ClinicalDataStats minValues, maxValues;
+	
 	unsigned int size;
 	listSize(list, &size);
-	ListElem elem;
+	
+	ListElem patientList;
+	listGet(list, 0, &patientList);
 
-	listGet(list, 0, &elem);
+	ListElem patientQueue;
 
-	minValues.avgAge = elem.clinicalData.age;
-	maxValues.avgAge = elem.clinicalData.age;
-
+	minValues.avgAge = patientList.clinicalData.age;
+	maxValues.avgAge = patientList.clinicalData.age;
+	
+	int count = 0;
+	
 	for (int i = 0; i < size; i++) {
 
-		listGet(list, i, &elem);
+		listGet(list, i, &patientList);
 
-		if (elem.clinicalData.age <= minValues.avgAge || elem.clinicalData.age <= maxValues.avgAge) {
-			minValues.avgAge = elem.clinicalData.age;
-			maxValues.avgAge = elem.clinicalData.age;
+		if (patientList.clinicalData.age <= minValues.avgAge || patientList.clinicalData.age <= maxValues.avgAge) {
 
-			//TODO
-
-
+			queueEnqueue(queue, patientQueue);
+			count++;
 		}
-
 	}
-
+	printf("Adicionados %d pacientes a fila\n", count);
+	
 }

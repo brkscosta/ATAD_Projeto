@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -122,6 +122,8 @@
     <ClCompile Include="map.c" />
     <ClCompile Include="mapElem.c" />
     <ClCompile Include="patient.c" />
+    <ClCompile Include="queue.c" />
+    <ClCompile Include="queueElem.c" />
     <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
@@ -131,13 +133,26 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="mapElem.h" />
     <ClInclude Include="patient.h" />
+    <ClInclude Include="queue.h" />
+    <ClInclude Include="queueElem.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ATAD1819_ProjetoFinal.pdf" />
     <None Include="clinicalData.csv" />
     <None Include="clinicalData_train.csv" />
     <None Include="patients.csv" />
     <None Include="patients_train.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Outputs\res_avg.txt" />
+    <Text Include="Outputs\res_checkdistrict.txt" />
+    <Text Include="Outputs\res_load.txt" />
+    <Text Include="Outputs\res_queue.txt" />
+    <Text Include="Outputs\res_show.txt" />
+    <Text Include="Outputs\res_sort_birthdate.txt" />
+    <Text Include="Outputs\res_sort_district_hospital.txt" />
+    <Text Include="Outputs\res_sort_hospital_birthdate.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

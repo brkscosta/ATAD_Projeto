@@ -2,19 +2,16 @@
 
 #include "list.h"
 #include "map.h"
-
+#include "queue.h"
 //FUNCOES DO PROJETO
 void load(PtList *patient);
 void loadt(PtList *patient);
 void show(PtList patients);
 void clear(PtList patients);
 void sort(PtList *patients);
-
 void avg(PtList patients);
-void averageClinicalData(PtList patients, PtMap *map);
-
 void checkDistrict(PtList patients);
-void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues);
+void queue(PtList listPatients, PtQueue queuePatients);
 
 //FUNCOES AUXILIARES
 
@@ -30,6 +27,20 @@ Idade
 */
 float getAge(Date date1, Date date2);
 
+/*
+
+*/
+void averageClinicalData(PtList patients, PtMap* map);
+
+/*
+
+*/
+void addToQueueStatsMinMaxAge(PtList list, PtQueue queue);
+
+/*
+
+*/
+int nextCommand(PtQueue patients);
 
 /*
 Devolve o rank do paciente
@@ -86,9 +97,6 @@ Retorno:
  0 se o hospital 1 é igual que hospital 2
 */
 int compareHospital(ListElem patient1, ListElem patient2);
-
-
-void checkDistrict(PtList patients);
 
 /*
 Ordena de forma crescente por Distrito
