@@ -58,9 +58,21 @@ void patientPrint(Patient patient) {
 
 }
 
-ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, float avgGlucose, float avgInsulin, float avgMcp1) {
 
+ClinicalDataStats ClinicalDataStatsCreate() {
+
+	ClinicalDataStats newClinicalDataStats;
+	newClinicalDataStats.avgAge = 0;
+	newClinicalDataStats.avgBmi = 0;
+	newClinicalDataStats.avgGlucose = 0;
+	newClinicalDataStats.avgInsulin = 0;
+	newClinicalDataStats.avgMcp1 = 0;
+	newClinicalDataStats.patientCount = 0;
+
+	return newClinicalDataStats;
 }
-void clinicalataStatisticsPrint(ClinicalDataStatistics *ClinicalDataStatistics) {
 
+void ClinicalDataStatsPrint(ClinicalDataStats *clinicalDataStatistics) {
+	printf("%f\t %f\t %f\t %f\t %f \t %d\n", clinicalDataStatistics->avgAge, clinicalDataStatistics->avgBmi,
+		clinicalDataStatistics->avgGlucose, clinicalDataStatistics->avgInsulin, clinicalDataStatistics->avgMcp1, clinicalDataStatistics->patientCount);
 }

@@ -81,9 +81,9 @@ void mapPrint(PtMap map) {
 		printf("(MAP EMPTY)\n");
 	}
 	else {
+		printf("District Age BMI Glucose Insulina MCP1\n");
 		for (int i = 0; i < map->size; i++) {
 			mapKeyPrint(map->elements[i].key);
-			printf(" : \n");
 			mapValuePrint(map->elements[i].value);
 		}
 	}
@@ -108,9 +108,7 @@ int mapPut(PtMap map, MapKey key, MapValue value) {
 			map->capacity += 1;
 		}
 		strcpy_s(map->elements[map->size].key, sizeof(map->elements[map->size].key), key);
-		//map->elements[map->size].key = key;
-		map->elements[map->size].value = value;
-		map->size++;
+		map->elements[map->size++].value = value;
 		return MAP_OK;
 	}
 }

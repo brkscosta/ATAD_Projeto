@@ -1,11 +1,11 @@
 #include "mapElem.h"
 
 void mapKeyPrint(MapKey key) {
-	printf("%s \n", key);
+	printf("%s :", key);
 }
 
 void mapValuePrint(MapValue value) {
-	clinicalataStatisticsPrint(&value);
+	ClinicalDataStatsPrint(&value);
 }
 
 /* funcao de comparacao de chaves */
@@ -16,5 +16,5 @@ int mapKeyEquals(MapKey key1, MapKey key2) {
 	if (result_strcmp == 0) {
 		return -1;
 	}*/
-	return  strcmp(key1, key2);
+	return  (strcmp(key1, key2) == 0);
 }

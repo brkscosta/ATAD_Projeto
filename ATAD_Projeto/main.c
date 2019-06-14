@@ -57,12 +57,7 @@ int main(int argc, char** argv) {
 			sort(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
-			/*PtMap map = mapCreate(20);
-			ListElem e;
-			listGet(listPatients, 0, &e);
-			mapPut(map, "Pinhal Novo", e);
-			mapPrint(map);*/
-			printf("Comando AVG nao implementado.\n");
+			avg(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
 			printf("Comando NORM nao implementado.\n");

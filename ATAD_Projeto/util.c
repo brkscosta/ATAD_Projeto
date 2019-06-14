@@ -3,6 +3,7 @@
 #include <string.h>
 #include "util.h"
 
+
 void load(PtList *patients) {
 	clrscr();
 	printf("\n===================================================================================");
@@ -98,12 +99,12 @@ void load(PtList *patients) {
 			Date data2 = dateCreate(day, month, year);
 
 			float age = getAge(patientElem.birthdate, data2);
-			patientElem.clinicalData.age = updateClinicalData(patientElem.clinicalData.age, age, patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.age = calculateAVG(patientElem.clinicalData.age, age, patientElem.clinicalData.clinicalDataCount);
 
-			patientElem.clinicalData.bmi = updateClinicalData(patientElem.clinicalData.bmi, atof(tokens[2]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.glucose = updateClinicalData(patientElem.clinicalData.glucose, atof(tokens[3]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.insulin = updateClinicalData(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.mcp1 = updateClinicalData(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.bmi = calculateAVG(patientElem.clinicalData.bmi, atof(tokens[2]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.glucose = calculateAVG(patientElem.clinicalData.glucose, atof(tokens[3]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.insulin = calculateAVG(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.mcp1 = calculateAVG(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.clinicalDataCount += 1;
 
 
@@ -244,12 +245,12 @@ void loadt(PtList *patients) {
 			Date data2 = dateCreate(day, month, year);
 
 			float age = getAge(patientElem.birthdate, data2);
-			patientElem.clinicalData.age = updateClinicalData(patientElem.clinicalData.age, age, patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.age = calculateAVG(patientElem.clinicalData.age, age, patientElem.clinicalData.clinicalDataCount);
 
-			patientElem.clinicalData.bmi = updateClinicalData(patientElem.clinicalData.bmi, atof(tokens[2]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.glucose = updateClinicalData(patientElem.clinicalData.glucose, atof(tokens[3]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.insulin = updateClinicalData(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.mcp1 = updateClinicalData(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.bmi = calculateAVG(patientElem.clinicalData.bmi, atof(tokens[2]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.glucose = calculateAVG(patientElem.clinicalData.glucose, atof(tokens[3]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.insulin = calculateAVG(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.mcp1 = calculateAVG(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.disease_type = atoi(tokens[6]);
 			patientElem.clinicalData.clinicalDataCount += 1;
 
@@ -317,7 +318,56 @@ void sort(PtList *patients) {
 }
 
 void avg(PtList patients) {
+	int size;
+	listSize(patients, &size);
+	sortByDistrict(patients);
+	PtMap map = mapCreate(size);
+	averageClinicalData(patients, &map);
+	mapPrint(map);
+	system("pause");
+	mapDestroy(&map);
+}
 
+void averageClinicalData(PtList patients, PtMap *map) {
+	int size;
+	listSize(patients, &size);
+
+	ListElem patient;
+	ClinicalDataStats clinicalDataStats;
+	String key;
+
+
+	for (int i = 0; i < size; i++) {
+		listGet(patients, i, &patient);
+		strcpy_s(key, sizeof(key), patient.district);
+
+		if (!mapContains(*map, key)) {
+			clinicalDataStats = ClinicalDataStatsCreate();
+			clinicalDataStats.avgAge = calculateAVG(clinicalDataStats.avgAge, patient.clinicalData.age, clinicalDataStats.patientCount);
+			clinicalDataStats.avgBmi = calculateAVG(clinicalDataStats.avgBmi, patient.clinicalData.bmi, clinicalDataStats.patientCount);
+			clinicalDataStats.avgGlucose = calculateAVG(clinicalDataStats.avgGlucose, patient.clinicalData.glucose, clinicalDataStats.patientCount);
+			clinicalDataStats.avgInsulin = calculateAVG(clinicalDataStats.avgInsulin, patient.clinicalData.insulin, clinicalDataStats.patientCount);
+			clinicalDataStats.avgMcp1 = calculateAVG(clinicalDataStats.avgMcp1, patient.clinicalData.mcp1, clinicalDataStats.patientCount);
+			clinicalDataStats.patientCount++;
+			mapPut(*map, key, clinicalDataStats);
+		}
+		else {
+			MapValue value; // == Item
+			mapGet(*map, key, &value);
+			value.avgAge = calculateAVG(value.avgAge, patient.clinicalData.age, clinicalDataStats.patientCount);
+			value.avgBmi = calculateAVG(value.avgBmi, patient.clinicalData.bmi, clinicalDataStats.patientCount);
+			value.avgGlucose = calculateAVG(value.avgGlucose, patient.clinicalData.glucose, clinicalDataStats.patientCount);
+			value.avgInsulin = calculateAVG(value.avgInsulin, patient.clinicalData.insulin, clinicalDataStats.patientCount);
+			value.avgMcp1 = calculateAVG(value.avgMcp1, patient.clinicalData.mcp1, clinicalDataStats.patientCount);
+			value.patientCount++;
+			mapPut(*map, key, value);
+		}
+
+
+
+
+
+	}
 }
 
 void clrscr()
@@ -357,7 +407,7 @@ float getAge(Date date1, Date date2) {
 	return age;
 }
 
-float updateClinicalData(float avg, float v, int n) {
+float calculateAVG(float avg, float v, int n) {
 	float value;
 
 	value = ((avg * n) + v) / (n + 1);

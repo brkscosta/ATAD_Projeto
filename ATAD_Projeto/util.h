@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "list.h"
-
+#include "map.h"
 
 //FUNCOES DO PROJETO
 void load(PtList *patient);
@@ -9,9 +9,9 @@ void loadt(PtList *patient);
 void show(PtList patients);
 void clear(PtList patients);
 void sort(PtList *patients);
-void avg(PtList patients);
 
-void averageClinicalData(PtList patients);
+void avg(PtList patients);
+void averageClinicalData(PtList patients, PtMap *map);
 //FUNCOES AUXILIARES
 
 void clrscr();
@@ -43,7 +43,7 @@ avg é a media com n elementos, o v é o novo elemento, e o n a posição
 Retorno:
 Valor medio
 */
-float updateClinicalData(float avg, float v, int n);
+float calculateAVG(float avg, float v, int n);
 
 
 /*

@@ -43,7 +43,7 @@ typedef struct clinicalataStatistics {
 	float avgInsulin;			/* Valores médios da Insulina (µU/ml) */
 	float avgMcp1;				/* Valores médios da Proteina MCP-1 (pg/ml)*/
 	int patientCount;		/* Numero de vezes que os dados foram obtidos*/
-}ClinicalDataStatistics;
+}ClinicalDataStats;
 
 typedef struct clinicalData *PtClinicalData;
 
@@ -54,5 +54,6 @@ typedef struct clinicalDataStatistics * PtClinicalDataStatistics;
 Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char *district);
 void patientPrint(Patient patient);
 
-ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, float avgGlucose, float avgInsulin, float avgMcp1);
-void clinicalataStatisticsPrint(ClinicalDataStatistics *ClinicalDataStatistics);
+ClinicalDataStats ClinicalDataStatsCreate();
+
+void ClinicalDataStatsPrint(ClinicalDataStats *ClinicalDataStat);
