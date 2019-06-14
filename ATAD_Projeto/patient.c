@@ -72,6 +72,7 @@ ClinicalDataStatistics clinicalataStatisticsCreate(float avgAge, float avgBmi, f
 }
 
 void clinicalDataStatisticsPrint(ClinicalDataStatistics *clinicalDataStatistics) {
-	printf("Age: %f\n BMI: %f\n Glucose: %f\n Insulina: %f\n MCP1: %f\n", clinicalDataStatistics->avgAge, clinicalDataStatistics->avgBmi,
+	printf("District Age BMI Glucose Insulina MCP1\n");
+	printf("%f %f %f %f %f\n", clinicalDataStatistics->avgAge, clinicalDataStatistics->avgBmi,
 		clinicalDataStatistics->avgGlucose, clinicalDataStatistics->avgInsulin, clinicalDataStatistics->avgMcp1);
 }

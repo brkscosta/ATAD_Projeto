@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "list.h"
-
+#include "map.h"
 
 //FUNCOES DO PROJETO
 void load(PtList *patient);
@@ -84,6 +84,8 @@ Retorno:
 int compareHospital(ListElem patient1, ListElem patient2);
 
 
+void checkDistrict(PtList patients);
+
 /*
 Ordena de forma crescente por Distrito
 Em caso de desempate ordena por hospital
@@ -111,5 +113,6 @@ Lista de pacientes(patients), paciente 1(patient1) e o seu rank (rank1), pacient
 void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, ListElem patient2);
 
 PtList copyData(PtList list);
+
 
 
