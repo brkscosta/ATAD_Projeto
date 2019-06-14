@@ -387,7 +387,7 @@ void checkDistrict(PtList patients) {
 		//option = atoi(command);
 
 		if (mapContains(map, command) == 1) {
-			print("Faz coisas");
+			printf("Faz coisas");
 			quit = 1;
 		}
 		else {
