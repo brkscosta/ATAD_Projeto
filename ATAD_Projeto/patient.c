@@ -56,13 +56,12 @@ ClinicalDataStats clinicalDataStatsCreate() {
 
 
 void clinicalDataStatsPrint(ClinicalDataStats *clinicalDataStats) {
-	printf("%5.1f  %8.4f   %3.0f    %8.4f  %10.4f %d \n",
+	printf("%5.1f  %8.4f   %3.0f    %8.4f  %10.4f\n",
 		clinicalDataStats->avgAge,
 		clinicalDataStats->avgBmi,
 		clinicalDataStats->avgGlucose,
 		clinicalDataStats->avgInsulin,
-		clinicalDataStats->avgMcp1,
-		clinicalDataStats->patientCount);
+		clinicalDataStats->avgMcp1);
 }
 
 
