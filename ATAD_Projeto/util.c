@@ -3,7 +3,6 @@
 #include <string.h>
 #include "util.h"
 
-
 void load(PtList *patients) {
 	clrscr();
 	printf("\n===================================================================================");
@@ -351,7 +350,7 @@ void averageClinicalData(PtList patients, PtMap *map) {
 	ListElem patient;
 	ClinicalDataStats clinicalDataStats;
 	String key;
-
+	int count = 0;
 
 	for (int i = 0; i < size; i++) {
 		listGet(patients, i, &patient);
@@ -364,7 +363,7 @@ void averageClinicalData(PtList patients, PtMap *map) {
 			clinicalDataStats.avgGlucose = calculateAVG(clinicalDataStats.avgGlucose, patient.clinicalData.glucose, clinicalDataStats.patientCount);
 			clinicalDataStats.avgInsulin = calculateAVG(clinicalDataStats.avgInsulin, patient.clinicalData.insulin, clinicalDataStats.patientCount);
 			clinicalDataStats.avgMcp1 = calculateAVG(clinicalDataStats.avgMcp1, patient.clinicalData.mcp1, clinicalDataStats.patientCount);
-			clinicalDataStats.patientCount++;
+			clinicalDataStats.patientCount += 1;
 			mapPut(*map, key, clinicalDataStats);
 		}
 		else {
@@ -375,7 +374,7 @@ void averageClinicalData(PtList patients, PtMap *map) {
 			value.avgGlucose = calculateAVG(value.avgGlucose, patient.clinicalData.glucose, value.patientCount);
 			value.avgInsulin = calculateAVG(value.avgInsulin, patient.clinicalData.insulin, value.patientCount);
 			value.avgMcp1 = calculateAVG(value.avgMcp1, patient.clinicalData.mcp1, value.patientCount);
-			value.patientCount++;
+			value.patientCount += 1;
 			mapPut(*map, key, value);
 		}
 	}
@@ -565,18 +564,18 @@ void sortByBirthdate(PtList patients) {
 	ListElem patient1, patient2;
 
 	for (int i = 0; i < size; i++) {
-		int indexMin = i;
-		for (int j = i; j < size; j++) {
-			listGet(patients, indexMin, &patient1);
-			listGet(patients, j, &patient2);
+		for (int j = 0; j < size - i - 1; j++) {
+
+			listGet(patients, j, &patient1);
+			listGet(patients, (j + 1), &patient2);
 
 			int result = compareBirthdate(patient1, patient2);
-			if (result > 0) {
-				indexMin = j;
+			if (result == 1) {
+				swapPatients(patients, j, (j + 1), patient1, patient2);
 			}
 		}
-		swapPatients(patients, indexMin, i, patient1, patient2);
 	}
+
 }
 
 int compareBirthdate(ListElem patient1, ListElem patient2) {
@@ -604,26 +603,24 @@ void sortByHospital(PtList patients) {
 
 	ListElem patient1, patient2;
 
-
 	for (int i = 0; i < size; i++) {
-		int indexMin = i;
-		for (int j = i; j < size; j++) {
-			listGet(patients, indexMin, &patient1);
-			listGet(patients, j, &patient2);
+		for (int j = 0; j < size - i - 1; j++) {
+
+			listGet(patients, j, &patient1);
+			listGet(patients, (j + 1), &patient2);
 
 			int result = compareHospital(patient1, patient2);
-
-			if (result > 0) indexMin = j;
-
-			if (result == 0) {
+			if (result > 0) {
+				swapPatients(patients, j, (j + 1), patient1, patient2);
+			}
+			else if (result == 0) {
 				//desempate pela data de nascimento
 				int resultBirthdate = compareBirthdate(patient1, patient2);
 
 				//Birthdate 2 é menor Birthdate 1
-				if (resultBirthdate > 0) indexMin = j;
+				if (resultBirthdate > 0) swapPatients(patients, j, (j + 1), patient1, patient2);
 			}
 		}
-		swapPatients(patients, indexMin, i, patient1, patient2);
 	}
 }
 
@@ -650,26 +647,24 @@ void sortByDistrict(PtList patients) {
 	int size;
 	listSize(patients, &size);
 	ListElem patient1, patient2;
-
 	for (int i = 0; i < size; i++) {
-		int indexMin = i;
-		for (int j = i; j < size; j++) {
-			listGet(patients, indexMin, &patient1);
-			listGet(patients, j, &patient2);
+		for (int j = 0; j < size - i - 1; j++) {
+
+			listGet(patients, j, &patient1);
+			listGet(patients, (j + 1), &patient2);
 
 			int result = compareDistrict(patient1, patient2);
-
-			if (result > 0) indexMin = j;
-
-			if (result == 0) {
+			if (result > 0) {
+				swapPatients(patients, j, (j + 1), patient1, patient2);
+			}
+			else if (result == 0) {
 				//desempate pelo hospital
 				int resultHospital = compareHospital(patient1, patient2);
 
 				//Hospital 2 é menor Hospital 1
-				if (resultHospital > 0) indexMin = j;
+				if (resultHospital > 0)  swapPatients(patients, j, (j + 1), patient1, patient2);
 			}
 		}
-		swapPatients(patients, indexMin, i, patient1, patient2);
 	}
 }
 
