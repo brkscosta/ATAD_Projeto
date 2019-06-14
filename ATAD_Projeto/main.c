@@ -1,7 +1,7 @@
 ﻿/* PROJETO  ATAD 2018-19
 * Identificacao dos Alunos:
 *
-*      Numero: 180221109 | Nome: Joanã Santos da Costa
+*      Numero: 180221109 | Nome: Joanã Costa
 *      Numero: 180221070 | Nome: Rafael Trindade
 *
 */
@@ -13,8 +13,7 @@
 #include<conio.h>
 #include "util.h"
 #include "map.h"
-typedef char String[255];
-
+#include "queue.h"
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
 void printCommandsMenu();
@@ -27,6 +26,10 @@ int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
 	PtList listPatients = listCreate(500);
+	
+	PtQueue queuePatients = queueCreate(280);
+
+
 	/* interpretador de comandos */
 	String command;
 	int quit = 0;
@@ -83,7 +86,14 @@ int main(int argc, char** argv) {
 			printf("Comando NORM nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
-			printf("Comando QUEUE nao implementado.\n");
+			
+			if (!listIsEmpty(listPatients))
+				queue(queuePatients, listPatients);
+			else 
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+
 		}
 		else if (equalsStringIgnoreCase(command, "CHECKDISTRICT")) {
 			if (listIsEmpty(listPatients) == 1) {
