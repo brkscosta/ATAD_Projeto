@@ -105,7 +105,7 @@ void load(PtList *patients) {
 			patientElem.clinicalData.glucose = calculateAVG(patientElem.clinicalData.glucose, atof(tokens[3]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.insulin = calculateAVG(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.mcp1 = calculateAVG(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
-			patientElem.clinicalData.clinicalDataCount += 1;
+			patientElem.clinicalData.clinicalDataCount++;
 
 
 			listSet(*patients, rank, patientElem, &oldClinicalData);
@@ -275,14 +275,14 @@ void sort(PtList *patients) {
 
 	printf("\n===================================================================================");
 	printf("\n                          SORT                                                     ");
-	printf("\n===================================================================================\n");
+	printf("\n===================================================================================\n\n");
 	printf("Select sorting criteria\n");
 	printf("1- Birthdate\n");
 	printf("2- Hospital\n");
 	printf("3- District\n");
 	printf("4- To return to the home menu\n\n");
 
-	PtList auxiliar = copyData(*patients);
+	PtList auxiliar = copyPtList(*patients);
 
 	do {
 		printf("COMMAND> ");
@@ -311,22 +311,31 @@ void sort(PtList *patients) {
 		}
 	} while (quit != 1);
 	listPrint(auxiliar);
-	listDestroy(&auxiliar);
 	system("pause");
+	listDestroy(&auxiliar);
 	clrscr();
 
 }
 
 void avg(PtList patients) {
+	clrscr();
 	printf("\n===================================================================================");
 	printf("\n                             AVG                                                   ");
-	printf("\n===================================================================================\n");
+	printf("\n===================================================================================\n\n");
 
+	int size;
+	listSize(patients, &size);
+
+	PtList auxiliar = listCreate(size);
+	auxiliar = copyPtList(patients);
+
+	sortByDistrict(auxiliar);
 	PtMap map = mapCreate(490);
+	averageClinicalData(auxiliar, &map);
 
-	sortByDistrict(patients);
-	averageClinicalData(patients, &map);
 	mapPrint(map);
+	system("pause");
+	clrscr();
 	mapDestroy(&map);
 
 }
@@ -355,13 +364,13 @@ void averageClinicalData(PtList patients, PtMap *map) {
 			mapPut(*map, key, clinicalDataStats);
 		}
 		else {
-			MapValue value; // == Item
+			MapValue value; // == clinicalDataStats
 			mapGet(*map, key, &value);
-			value.avgAge = calculateAVG(value.avgAge, patient.clinicalData.age, clinicalDataStats.patientCount);
-			value.avgBmi = calculateAVG(value.avgBmi, patient.clinicalData.bmi, clinicalDataStats.patientCount);
-			value.avgGlucose = calculateAVG(value.avgGlucose, patient.clinicalData.glucose, clinicalDataStats.patientCount);
-			value.avgInsulin = calculateAVG(value.avgInsulin, patient.clinicalData.insulin, clinicalDataStats.patientCount);
-			value.avgMcp1 = calculateAVG(value.avgMcp1, patient.clinicalData.mcp1, clinicalDataStats.patientCount);
+			value.avgAge = calculateAVG(value.avgAge, patient.clinicalData.age, value.patientCount);
+			value.avgBmi = calculateAVG(value.avgBmi, patient.clinicalData.bmi, value.patientCount);
+			value.avgGlucose = calculateAVG(value.avgGlucose, patient.clinicalData.glucose, value.patientCount);
+			value.avgInsulin = calculateAVG(value.avgInsulin, patient.clinicalData.insulin, value.patientCount);
+			value.avgMcp1 = calculateAVG(value.avgMcp1, patient.clinicalData.mcp1, value.patientCount);
 			value.patientCount++;
 			mapPut(*map, key, value);
 		}
@@ -376,7 +385,7 @@ void checkDistrict(PtList patients) {
 	int quit = 0;
 	printf("\n===================================================================================");
 	printf("\n                             CHECKDISTRICT                                         ");
-	printf("\n===================================================================================\n");
+	printf("\n===================================================================================\n\n");
 
 	//TODO:
 	PtMap map = mapCreate(20);
@@ -432,9 +441,9 @@ float getAge(Date date1, Date date2) {
 		return age - 1;
 
 	}
-	else if (date2.day < date1.day)
+	else if (date1.month == date2.month)
 	{
-		return age - 1;
+		if (date2.day < date1.day) return age - 1;
 	}
 
 	return age;
@@ -602,7 +611,7 @@ void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, List
 	listSet(patients, rank1, patient2, &temp);
 }
 
-PtList copyData(PtList list) {
+PtList copyPtList(PtList list) {
 	int size;
 	listSize(list, &size);
 	PtList newList = listCreate(size);

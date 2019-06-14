@@ -81,7 +81,7 @@ void mapPrint(PtMap map) {
 		printf("(MAP EMPTY)\n");
 	}
 	else {
-		printf("District Age BMI Glucose Insulina MCP1\n");
+		printf("District              Age    BMI       Glucose Insulina  MCP1\n");
 		for (int i = 0; i < map->size; i++) {
 			mapKeyPrint(map->elements[i].key);
 			mapValuePrint(map->elements[i].value);

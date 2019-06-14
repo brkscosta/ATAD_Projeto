@@ -28,34 +28,17 @@ Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char 
 }
 
 void patientPrint(Patient patient) {
-	//printf("%3d \t %d-%d-%d \b %c \b %-35s \t %-15s %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t",
-	/*printf("%3d\t%d/%d/%d \t %c\t%-35s\t%s",
+	printf("%3d %02d/%02d/%02d %c %-35s  %-16s    %2.0f %8.4f %6.1f %8.4f %10.4f \n",
 		patient.id,
 		patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
 		patient.gender,
 		patient.hospital,
-		patient.district);
-	printf("\t\tClinical Data\n \t\tAge:%.1f\tBmi:%.2f\tGlicose:%.1f\tInsulin:%.1f\tMcp1:%.1f\n",
-		patient.clinicalData.age,
-		patient.clinicalData.bmi,
-		patient.clinicalData.glucose,
-		patient.clinicalData.insulin,
-		patient.clinicalData.mcp1);*/
-
-	printf("%3d    %02d/%02d/%02d    %c %-35s    %s    %.2f",
-		patient.id,
-		patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
-		patient.gender,
-		patient.hospital,
-		patient.district, patient.clinicalData.age);
-	/*printf("\t\tClinical Data\n \t\tAge:%.1f\tBmi:%.2f\tGlicose:%.1f\tInsulin:%.1f\tMcp1:%.1f\n",
+		patient.district,
 		patient.clinicalData.age,
 		patient.clinicalData.bmi,
 		patient.clinicalData.glucose,
 		patient.clinicalData.insulin,
 		patient.clinicalData.mcp1);
-*/
-
 }
 
 ClinicalDataStats clinicalDataStatsCreate() {
@@ -73,7 +56,13 @@ ClinicalDataStats clinicalDataStatsCreate() {
 
 
 void clinicalDataStatsPrint(ClinicalDataStats *clinicalDataStats) {
-	printf("%f\t %f\t %f\t %f\t %f \t %d\n", clinicalDataStats->avgAge, clinicalDataStats->avgBmi,
-		clinicalDataStats->avgGlucose, clinicalDataStats->avgInsulin, clinicalDataStats->avgMcp1, clinicalDataStats->patientCount);
+	printf("%5.1f  %8.4f   %3.0f    %8.4f  %10.4f %d \n",
+		clinicalDataStats->avgAge,
+		clinicalDataStats->avgBmi,
+		clinicalDataStats->avgGlucose,
+		clinicalDataStats->avgInsulin,
+		clinicalDataStats->avgMcp1,
+		clinicalDataStats->patientCount);
 }
+
 

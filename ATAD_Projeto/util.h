@@ -116,7 +116,7 @@ Lista de pacientes(patients), paciente 1(patient1) e o seu rank (rank1), pacient
 */
 void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, ListElem patient2);
 
-PtList copyData(PtList list);
+PtList copyPtList(PtList list);
 
 
 

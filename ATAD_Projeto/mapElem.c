@@ -1,7 +1,7 @@
 #include "mapElem.h"
 
 void mapKeyPrint(MapKey key) {
-	printf("%s :", key);
+	printf("%-17s    ", key);
 }
 
 void mapValuePrint(MapValue value) {
