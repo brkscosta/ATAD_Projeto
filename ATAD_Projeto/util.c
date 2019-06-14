@@ -615,35 +615,6 @@ PtList copyData(PtList list) {
 }
 
 void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues) {
-
-	unsigned int size;
-	listSize(list, &size);
-	ListElem elem;
-
-	listGet(list, 0, &elem);
-
-	minValues.avgAge = elem.clinicalData.age;
-	maxValues.avgAge = elem.clinicalData.age;
-
-	for (int i = 0; i < size; i++) {
-
-		listGet(list, i, &elem);
-
-		if (elem.clinicalData.age <= minValues.avgAge || elem.clinicalData.age <= maxValues.avgAge) {
-			minValues.avgAge = elem.clinicalData.age;
-			maxValues.avgAge = elem.clinicalData.age;
-
-			//TODO
-
-
-		}
-
-	}
-
-}
-
-void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues) {
-
 	unsigned int size;
 	listSize(list, &size);
 	ListElem elem;

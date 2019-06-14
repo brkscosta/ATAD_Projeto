@@ -14,7 +14,7 @@ void avg(PtList patients);
 void averageClinicalData(PtList patients, PtMap *map);
 
 void checkDistrict(PtList patients);
-void statsMinMaxAge(PtList list);
+void statsMinMaxAge(PtList list, ClinicalDataStats minValues, ClinicalDataStats maxValues);
 
 //FUNCOES AUXILIARES
 
