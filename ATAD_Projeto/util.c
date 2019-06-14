@@ -304,6 +304,10 @@ void sort(PtList *patients) {
 		}
 		else if (option == 4) {
 			quit = 1;
+			system("pause");
+			listDestroy(&auxiliar);
+			clrscr();
+			return;
 		}
 		else {
 			printf("\033[0;31m Command not found.\n");
@@ -381,33 +385,46 @@ void checkDistrict(PtList patients) {
 
 	clrscr();
 	char command[20];
-	int option;
 	int quit = 0;
+	int size;
 	printf("\n===================================================================================");
 	printf("\n                             CHECKDISTRICT                                         ");
-	printf("\n===================================================================================\n\n");
+	printf("\n===================================================================================\n");
 
-	//TODO:
-	PtMap map = mapCreate(20);
+
+	listSize(patients, &size);
+
+	PtMap map = mapCreate(size);
+	averageClinicalData(patients, &map);
+	MapValue value;
+
 	do {
-		printf("COMMAND> ");
+		printf("\nDISTRICT> ");
 		fgets(command, sizeof(command), stdin);
 		command[strlen(command) - 1] = '\0';
-		//option = atoi(command);
 
 		if (mapContains(map, command) == 1) {
-			printf("Faz coisas");
+			mapGet(map, command, &value);
+			printf("District              Age    BMI       Glucose Insulina  MCP1\n");
+			mapKeyPrint(command);
+			mapValuePrint(value);
+		}
+		else if (strcmp(command, " ") == 0 || strcmp(command, "") == 0) {
 			quit = 1;
+			mapDestroy(&map);
+			system("pause");
+			clrscr();
+			return;
 		}
 		else {
-			printf("\033[0;31m Localidade nao encontrada.\n");
+			printf("\033[0;31m District not found.\n");
 			printf("\033[0m");
 		}
 
 	} while (quit != 1);
 
 	mapPrint(map);
-	mapDestroy(map);
+	mapDestroy(&map);
 	system("pause");
 	clrscr();
 }

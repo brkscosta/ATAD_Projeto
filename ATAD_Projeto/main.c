@@ -48,16 +48,36 @@ int main(int argc, char** argv) {
 			load(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
-			clear(listPatients);
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else clear(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "SHOW")) {
-			show(listPatients);
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else show(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "SORT")) {
-			sort(&listPatients);
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else sort(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "AVG")) {
-			avg(listPatients);
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else avg(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
 			printf("Comando NORM nao implementado.\n");
@@ -66,7 +86,12 @@ int main(int argc, char** argv) {
 			printf("Comando QUEUE nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "CHECKDISTRICT")) {
-			printf("Comando CHECKDISTRICT nao implementado.\n");
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else checkDistrict(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "LOADT")) {
 			loadt(&listPatients);
