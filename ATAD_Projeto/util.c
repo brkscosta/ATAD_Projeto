@@ -105,8 +105,6 @@ void load(PtList *patients) {
 			patientElem.clinicalData.insulin = calculateAVG(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.mcp1 = calculateAVG(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.clinicalDataCount++;
-
-
 			listSet(*patients, rank, patientElem, &oldClinicalData);
 
 		}
@@ -433,7 +431,7 @@ void queue(PtList patients) {
 	clrscr();
 	char command[20];
 	int quit = 0;
-	int size;
+	int size, size1;
 	printf("\n===================================================================================");
 	printf("\n                             QUEUE                                                  ");
 	printf("\n===================================================================================\n");
@@ -441,7 +439,7 @@ void queue(PtList patients) {
 	printf("next\n");
 	printf("stop\n");
 
-	PtQueue queuePatients = queueCreate(1);
+	PtQueue queuePatients = queueCreate(500);
 
 	/*ClinicalDataStats averageValue = clinicalDataStatsCreate();
 	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate();*/
@@ -455,38 +453,40 @@ void queue(PtList patients) {
 	printf("Min(%f) Max(%f) Average(%f)\n", min.avgInsulin, max.avgInsulin, averageValue.avgInsulin);
 	printf("Min(%f) Max(%f) Average(%f)\n", min.avgMcp1, max.avgMcp1, averageValue.avgMcp1);
 	addToQueue(patients, &queuePatients, &averageValue);
+	queuePrint(queuePatients);
+	queueSize(queuePatients, &size1);
+	printf("%d\n", size1);
+	//do {
 
-	do {
+	//	printf("COMMAND> ");
+	//	fgets(command, sizeof(command), stdin);
+	//	command[strlen(command) - 1] = '\0';
 
-		printf("COMMAND> ");
-		fgets(command, sizeof(command), stdin);
-		command[strlen(command) - 1] = '\0';
+	//	if (strcmp(command, "next") == 0) {
+	//		int res = nextCommand(queuePatients);
 
-		if (strcmp(command, "next") == 0) {
-			int res = nextCommand(queuePatients);
+	//		if (res == 0) {
+	//			printf("\033[0;31m A fila está vazia.\n");
+	//			printf("\033[0m");
+	//			system("pause");
+	//			quit != 0;
+	//		}
 
-			if (res == 0) {
-				printf("\033[0;31m A fila está vazia.\n");
-				printf("\033[0m");
-				system("pause");
-				quit != 0;
-			}
+	//		queuePrint(queue);
+	//	}
+	//	else if (command == "stop") {
+	//		printf("Terminando processo...\n\n");
+	//		system("pause");
+	//		quit = 1;
+	//		queueDestroy(&queuePatients);
+	//	}
+	//	else {
+	//		printf("\033[0;31m Comando not valid.\n");
+	//		printf("\033[0m");
+	//	}
 
-			queuePrint(queue);
-		}
-		else if (command == "stop") {
-			printf("Terminando processo...\n\n");
-			system("pause");
-			quit = 1;
-			queueDestroy(&queuePatients);
-		}
-		else {
-			printf("\033[0;31m Comando not valid.\n");
-			printf("\033[0m");
-		}
-
-	} while (quit != 1);
-
+	//} while (quit != 1);
+	system("pause");
 	queueDestroy(&queuePatients);
 	clrscr();
 }
@@ -728,24 +728,27 @@ void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats averageValue) {
 
 	for (int i = 0; i < size; i++) {
 		listGet(list, i, &patientList);
-		if (patientList.clinicalData.age < averageValue->avgAge) {
-			count++;
-			queueEnqueue(*queue, patientList);
+		if (patientList.id == 19) {
+			printf("boas");
 		}
-		else if (patientList.clinicalData.age > averageValue->avgAge) {
+		if (patientList.clinicalData.age < averageValue->avgAge) {
+			queueEnqueue(*queue, patientList);
+			count++;
+		}
+		else if (patientList.clinicalData.age >= averageValue->avgAge) {
 
 			if (patientList.clinicalData.bmi < averageValue->avgBmi &&
-				patientList.clinicalData.glucose < averageValue->avgGlucose &&
-				patientList.clinicalData.insulin < averageValue->avgInsulin &&
-				patientList.clinicalData.mcp1 < averageValue->avgBmi) {
-				count++;
+				patientList.clinicalData.glucose < averageValue->avgGlucose  &&
+				patientList.clinicalData.insulin < averageValue->avgInsulin  &&
+				patientList.clinicalData.mcp1 < averageValue->avgMcp1) {
+
 				queueEnqueue(*queue, patientList);
+				count++;
 			}
 		}
-	}
-	queuePrint(*queue);
-	printf("Adicionados %d pacientes a fila\n", count);
 
+	}
+	printf("Adicionados %d pacientes a fila\n", count);
 }
 
 void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue, PtClinicalDataStats averageValue) {

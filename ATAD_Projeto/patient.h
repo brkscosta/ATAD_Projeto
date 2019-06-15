@@ -11,7 +11,7 @@ typedef char String[255];
 
 
 typedef struct clinicalData {
-	float age;				/* Média da idade em anos quando os dados foram obtidos */
+	int age;				/* Média da idade em anos quando os dados foram obtidos */
 	float bmi;				/* Valores médios do Imc- Indice Massa corporal médio (Kg/m2) */
 	float glucose;			/* Valores médios da Glicose (mg/dl) */
 	float insulin;			/* Valores médios da Insulina (µU/ml) */
