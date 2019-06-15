@@ -450,7 +450,11 @@ void queue(PtList patients) {
 	findMinAndMaxAndAVG(patients, &min, &max, &averageValue);
 
 	printf("Min(%f) Max(%f) Average(%f)\n", min.avgAge, max.avgAge, averageValue.avgAge);
-	//addToQueueAge(patients, &queuePatients);
+	printf("Min(%f) Max(%f) Average(%f)\n", min.avgBmi, max.avgBmi, averageValue.avgBmi);
+	printf("Min(%f) Max(%f) Average(%f)\n", min.avgGlucose, max.avgGlucose, averageValue.avgGlucose);
+	printf("Min(%f) Max(%f) Average(%f)\n", min.avgInsulin, max.avgInsulin, averageValue.avgInsulin);
+	printf("Min(%f) Max(%f) Average(%f)\n", min.avgMcp1, max.avgMcp1, averageValue.avgMcp1);
+	addToQueue(patients, &queuePatients, &averageValue);
 
 	do {
 
@@ -715,25 +719,31 @@ PtList copyPtList(PtList list) {
 	return newList;
 }
 
-void addToQueue(PtList list, PtQueue *queue, PtClinicalData min) {
+void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats averageValue) {
 
 	unsigned int size;
 	listSize(list, &size);
 	ListElem patientList;
-
-
 	int count = 0;
 
 	for (int i = 0; i < size; i++) {
-
 		listGet(list, i, &patientList);
+		if (patientList.clinicalData.age < averageValue->avgAge) {
+			count++;
+			queueEnqueue(*queue, patientList);
+		}
+		else if (patientList.clinicalData.age > averageValue->avgAge) {
 
-
-		//if (patientList.clinicalData.age <= min.avgAge || patientList.clinicalData.age <= maxValues.avgAge) {
-		//	//queueEnqueue(queue, patientQueue);
-		//	count++;
-		//}
+			if (patientList.clinicalData.bmi < averageValue->avgBmi &&
+				patientList.clinicalData.glucose < averageValue->avgGlucose &&
+				patientList.clinicalData.insulin < averageValue->avgInsulin &&
+				patientList.clinicalData.mcp1 < averageValue->avgBmi) {
+				count++;
+				queueEnqueue(*queue, patientList);
+			}
+		}
 	}
+	queuePrint(*queue);
 	printf("Adicionados %d pacientes a fila\n", count);
 
 }
