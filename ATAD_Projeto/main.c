@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include<conio.h>
+#include <conio.h>
 #include "util.h"
 
 /* definicao de prototipos de funcoes, definidas depois do main() */

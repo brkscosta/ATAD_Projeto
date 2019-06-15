@@ -9,9 +9,6 @@ typedef String MapKey;
 
 typedef ClinicalDataStats MapValue;
 
-typedef ClinicalDataStats MapValue;
-
-
 void mapKeyPrint(MapKey key);
 void mapValuePrint(MapValue value);
 
