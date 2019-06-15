@@ -12,8 +12,7 @@
 #include <locale.h>
 #include<conio.h>
 #include "util.h"
-#include "map.h"
-#include "queue.h"
+
 /* definicao de prototipos de funcoes, definidas depois do main() */
 int equalsStringIgnoreCase(char str1[], char str2[]);
 void printCommandsMenu();
@@ -26,9 +25,6 @@ int main(int argc, char** argv) {
 
 	/* declaracao de variaveis */
 	PtList listPatients = listCreate(500);
-	
-	PtQueue queuePatients = queueCreate(280);
-
 
 	/* interpretador de comandos */
 	String command;
@@ -86,14 +82,12 @@ int main(int argc, char** argv) {
 			printf("Comando NORM nao implementado.\n");
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
-			
-			if (!listIsEmpty(listPatients))
-				queue(queuePatients, listPatients);
-			else 
+			if (listIsEmpty(listPatients) == 1) {
 				clrscr();
 				printf("\033[0;31m Unloaded data\n");
 				printf("\033[0m");
-
+			}
+			else queue(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "CHECKDISTRICT")) {
 			if (listIsEmpty(listPatients) == 1) {

@@ -3,6 +3,7 @@
 #include "list.h"
 #include "map.h"
 #include "queue.h"
+
 //FUNCOES DO PROJETO
 void load(PtList *patient);
 void loadt(PtList *patient);
@@ -11,7 +12,7 @@ void clear(PtList patients);
 void sort(PtList *patients);
 void avg(PtList patients);
 void checkDistrict(PtList patients);
-void queue(PtList listPatients, PtQueue queuePatients);
+void queue(PtList patients);
 
 //FUNCOES AUXILIARES
 
@@ -35,7 +36,7 @@ void averageClinicalData(PtList patients, PtMap* map);
 /*
 
 */
-void addToQueueStatsMinMaxAge(PtList list, PtQueue queue);
+void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue);
 
 /*
 
@@ -129,6 +130,11 @@ void swapPatients(PtList patients, int rank1, int rank2, ListElem patient1, List
 Copia os dados de uma lista para outra
 */
 PtList copyPtList(PtList list);
+
+/*
+Procura na lista o valor medio minimo e maximo de cada Clinical Data
+*/
+void findMinAndMax(PtList list, PtClinicalData minValue, PtClinicalData maxValue);
 
 
 

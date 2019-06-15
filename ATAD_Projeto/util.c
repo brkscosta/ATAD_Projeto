@@ -428,7 +428,7 @@ void checkDistrict(PtList patients) {
 	clrscr();
 }
 
-void queue(PtList patientsList, PtQueue queuePatients) {
+void queue(PtList patients) {
 
 	clrscr();
 	char command[20];
@@ -441,11 +441,14 @@ void queue(PtList patientsList, PtQueue queuePatients) {
 	printf("next\n");
 	printf("stop\n");
 
-	queueSize(queuePatients, &size);
-	addToQueueStatsMinMaxAge(patientsList, size, queuePatients);
-	
+	PtQueue queuePatients = queueCreate(1);
+	//addToQueueStatsMinMaxAge(patients, &queuePatients);
+
+	ClinicalData min, max;
+	findMinAndMax(patients, &min, &max);
+	printf("Min(%f) Max(%f)", min.age, max.age);
 	do {
-		
+
 		printf("COMMAND> ");
 		fgets(command, sizeof(command), stdin);
 		command[strlen(command) - 1] = '\0';
@@ -460,12 +463,13 @@ void queue(PtList patientsList, PtQueue queuePatients) {
 				quit != 0;
 			}
 
-			//queuePrint(queue);
-		} else if (command == "stop") {
+			queuePrint(queue);
+		}
+		else if (command == "stop") {
 			printf("Terminando processo...\n\n");
 			system("pause");
 			quit = 1;
-			queueDestroy(queuePatients);
+			queueDestroy(&queuePatients);
 		}
 		else {
 			printf("\033[0;31m Comando not valid.\n");
@@ -473,13 +477,13 @@ void queue(PtList patientsList, PtQueue queuePatients) {
 		}
 
 	} while (quit != 1);
-	
-	queueDestroy(queuePatients);
+
+	queueDestroy(&queuePatients);
 	clrscr();
 }
 
 int nextCommand(PtQueue patients) {
-	
+
 	ListElem patient;
 	if (!queueIsEmpty(patients)) {
 		//Busca o que está em primeiro
@@ -706,13 +710,13 @@ PtList copyPtList(PtList list) {
 	return newList;
 }
 
-void addToQueueStatsMinMaxAge(PtList list, PtQueue queue) {
-	
+void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue) {
+
 	ClinicalDataStats minValues, maxValues;
-	
+
 	unsigned int size;
 	listSize(list, &size);
-	
+
 	ListElem patientList;
 	listGet(list, 0, &patientList);
 
@@ -720,19 +724,56 @@ void addToQueueStatsMinMaxAge(PtList list, PtQueue queue) {
 
 	minValues.avgAge = patientList.clinicalData.age;
 	maxValues.avgAge = patientList.clinicalData.age;
-	
+
 	int count = 0;
-	
+
 	for (int i = 0; i < size; i++) {
 
 		listGet(list, i, &patientList);
 
 		if (patientList.clinicalData.age <= minValues.avgAge || patientList.clinicalData.age <= maxValues.avgAge) {
-
-			queueEnqueue(queue, patientQueue);
+			//queueEnqueue(queue, patientQueue);
 			count++;
 		}
 	}
 	printf("Adicionados %d pacientes a fila\n", count);
-	
+
+}
+
+void findMinAndMax(PtList list, PtClinicalData minValue, PtClinicalData maxValue) {
+	int size;
+	ListElem patient;
+	listSize(list, &size);
+
+	listGet(list, 0, &patient);
+	minValue->age = patient.clinicalData.age;
+	minValue->bmi = patient.clinicalData.bmi;
+	minValue->glucose = patient.clinicalData.glucose;
+	minValue->insulin = patient.clinicalData.insulin;
+	minValue->mcp1 = patient.clinicalData.mcp1;
+
+	maxValue->age = patient.clinicalData.age;
+	maxValue->bmi = patient.clinicalData.bmi;
+	maxValue->glucose = patient.clinicalData.glucose;
+	maxValue->insulin = patient.clinicalData.insulin;
+	maxValue->mcp1 = patient.clinicalData.mcp1;
+
+	for (int i = 0; i < size; i++) {
+		listGet(list, i, &patient);
+		if (minValue->age > patient.clinicalData.age) minValue->age = patient.clinicalData.age;
+		if (maxValue->age < patient.clinicalData.age) maxValue->age = patient.clinicalData.age;
+
+		if (minValue->bmi > patient.clinicalData.bmi) minValue->bmi = patient.clinicalData.bmi;
+		if (maxValue->bmi < patient.clinicalData.bmi) maxValue->bmi = patient.clinicalData.bmi;
+
+		if (minValue->glucose > patient.clinicalData.glucose) minValue->glucose = patient.clinicalData.glucose;
+		if (maxValue->glucose < patient.clinicalData.glucose) maxValue->glucose = patient.clinicalData.glucose;
+
+		if (minValue->insulin > patient.clinicalData.insulin) minValue->insulin = patient.clinicalData.insulin;
+		if (maxValue->insulin < patient.clinicalData.insulin) maxValue->insulin = patient.clinicalData.insulin;
+
+		if (minValue->mcp1 > patient.clinicalData.mcp1) minValue->mcp1 = patient.clinicalData.mcp1;
+		if (maxValue->mcp1 < patient.clinicalData.mcp1) maxValue->mcp1 = patient.clinicalData.mcp1;
+	}
+
 }
