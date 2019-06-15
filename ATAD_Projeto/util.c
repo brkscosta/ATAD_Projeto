@@ -442,11 +442,13 @@ void queue(PtList patients) {
 	printf("stop\n");
 
 	PtQueue queuePatients = queueCreate(1);
-	//addToQueueStatsMinMaxAge(patients, &queuePatients);
 
-	ClinicalData min, max;
+	ClinicalDataStats min, max;
+
 	findMinAndMax(patients, &min, &max);
-	printf("Min(%f) Max(%f)", min.age, max.age);
+
+	addToQueueStatsMinMaxAge(patients, &queuePatients, min, max);
+
 	do {
 
 		printf("COMMAND> ");
@@ -710,20 +712,12 @@ PtList copyPtList(PtList list) {
 	return newList;
 }
 
-void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue) {
-
-	ClinicalDataStats minValues, maxValues;
+void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue, ClinicalDataStats min, ClinicalDataStats max) {
 
 	unsigned int size;
 	listSize(list, &size);
-
 	ListElem patientList;
-	listGet(list, 0, &patientList);
 
-	ListElem patientQueue;
-
-	minValues.avgAge = patientList.clinicalData.age;
-	maxValues.avgAge = patientList.clinicalData.age;
 
 	int count = 0;
 
@@ -731,49 +725,50 @@ void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue) {
 
 		listGet(list, i, &patientList);
 
-		if (patientList.clinicalData.age <= minValues.avgAge || patientList.clinicalData.age <= maxValues.avgAge) {
-			//queueEnqueue(queue, patientQueue);
-			count++;
-		}
+
+		//if (patientList.clinicalData.age <= min.avgAge || patientList.clinicalData.age <= maxValues.avgAge) {
+		//	//queueEnqueue(queue, patientQueue);
+		//	count++;
+		//}
 	}
 	printf("Adicionados %d pacientes a fila\n", count);
 
 }
 
-void findMinAndMax(PtList list, PtClinicalData minValue, PtClinicalData maxValue) {
+void findMinAndMax(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue) {
 	int size;
 	ListElem patient;
 	listSize(list, &size);
 
 	listGet(list, 0, &patient);
-	minValue->age = patient.clinicalData.age;
-	minValue->bmi = patient.clinicalData.bmi;
-	minValue->glucose = patient.clinicalData.glucose;
-	minValue->insulin = patient.clinicalData.insulin;
-	minValue->mcp1 = patient.clinicalData.mcp1;
+	minValue->avgAge = patient.clinicalData.age;
+	minValue->avgBmi = patient.clinicalData.bmi;
+	minValue->avgGlucose = patient.clinicalData.glucose;
+	minValue->avgInsulin = patient.clinicalData.insulin;
+	minValue->avgMcp1 = patient.clinicalData.mcp1;
 
-	maxValue->age = patient.clinicalData.age;
-	maxValue->bmi = patient.clinicalData.bmi;
-	maxValue->glucose = patient.clinicalData.glucose;
-	maxValue->insulin = patient.clinicalData.insulin;
-	maxValue->mcp1 = patient.clinicalData.mcp1;
+	maxValue->avgAge = patient.clinicalData.age;
+	maxValue->avgBmi = patient.clinicalData.bmi;
+	maxValue->avgGlucose = patient.clinicalData.glucose;
+	maxValue->avgInsulin = patient.clinicalData.insulin;
+	maxValue->avgMcp1 = patient.clinicalData.mcp1;
 
 	for (int i = 0; i < size; i++) {
 		listGet(list, i, &patient);
-		if (minValue->age > patient.clinicalData.age) minValue->age = patient.clinicalData.age;
-		if (maxValue->age < patient.clinicalData.age) maxValue->age = patient.clinicalData.age;
+		if (minValue->avgAge > patient.clinicalData.age) minValue->avgAge = patient.clinicalData.age;
+		if (maxValue->avgAge < patient.clinicalData.age) maxValue->avgAge = patient.clinicalData.age;
 
-		if (minValue->bmi > patient.clinicalData.bmi) minValue->bmi = patient.clinicalData.bmi;
-		if (maxValue->bmi < patient.clinicalData.bmi) maxValue->bmi = patient.clinicalData.bmi;
+		if (minValue->avgBmi > patient.clinicalData.bmi) minValue->avgBmi = patient.clinicalData.bmi;
+		if (maxValue->avgBmi < patient.clinicalData.bmi) maxValue->avgBmi = patient.clinicalData.bmi;
 
-		if (minValue->glucose > patient.clinicalData.glucose) minValue->glucose = patient.clinicalData.glucose;
-		if (maxValue->glucose < patient.clinicalData.glucose) maxValue->glucose = patient.clinicalData.glucose;
+		if (minValue->avgGlucose > patient.clinicalData.glucose) minValue->avgGlucose = patient.clinicalData.glucose;
+		if (maxValue->avgGlucose < patient.clinicalData.glucose) maxValue->avgGlucose = patient.clinicalData.glucose;
 
-		if (minValue->insulin > patient.clinicalData.insulin) minValue->insulin = patient.clinicalData.insulin;
-		if (maxValue->insulin < patient.clinicalData.insulin) maxValue->insulin = patient.clinicalData.insulin;
+		if (minValue->avgInsulin > patient.clinicalData.insulin) minValue->avgInsulin = patient.clinicalData.insulin;
+		if (maxValue->avgInsulin < patient.clinicalData.insulin) maxValue->avgInsulin = patient.clinicalData.insulin;
 
-		if (minValue->mcp1 > patient.clinicalData.mcp1) minValue->mcp1 = patient.clinicalData.mcp1;
-		if (maxValue->mcp1 < patient.clinicalData.mcp1) maxValue->mcp1 = patient.clinicalData.mcp1;
+		if (minValue->avgMcp1 > patient.clinicalData.mcp1) minValue->avgMcp1 = patient.clinicalData.mcp1;
+		if (maxValue->avgMcp1 < patient.clinicalData.mcp1) maxValue->avgMcp1 = patient.clinicalData.mcp1;
 	}
 
 }

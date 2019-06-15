@@ -36,7 +36,7 @@ typedef struct patient {
 	ClinicalData clinicalData;	/* Dados clínicos do doente (médias)*/
 } Patient;
 
-typedef struct clinicalataStatistics {
+typedef struct ClinicalDataStats {
 	float avgAge;				/* Média da idade em anos quando os dados foram obtidos */
 	float avgBmi;				/* Valores médios do Imc- Indice Massa corporal médio (Kg/m2) */
 	float avgGlucose;			/* Valores médios da Glicose (mg/dl) */
@@ -49,7 +49,7 @@ typedef struct clinicalData *PtClinicalData;
 
 typedef struct patient * PtPatient;
 
-typedef struct clinicalataStatistics * PtClinicalDataStats;
+typedef struct ClinicalDataStats * PtClinicalDataStats;
 
 /*
 Construtor para o paciente
