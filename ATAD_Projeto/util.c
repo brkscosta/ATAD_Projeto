@@ -443,11 +443,14 @@ void queue(PtList patients) {
 
 	PtQueue queuePatients = queueCreate(1);
 
-	ClinicalDataStats min, max;
+	/*ClinicalDataStats averageValue = clinicalDataStatsCreate();
+	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate();*/
 
-	findMinAndMax(patients, &min, &max);
+	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate(), averageValue = clinicalDataStatsCreate();
+	findMinAndMaxAndAVG(patients, &min, &max, &averageValue);
 
-	addToQueueStatsMinMaxAge(patients, &queuePatients, min, max);
+	printf("Min(%f) Max(%f) Average(%f)\n", min.avgAge, max.avgAge, averageValue.avgAge);
+	//addToQueueAge(patients, &queuePatients);
 
 	do {
 
@@ -712,7 +715,7 @@ PtList copyPtList(PtList list) {
 	return newList;
 }
 
-void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue, ClinicalDataStats min, ClinicalDataStats max) {
+void addToQueue(PtList list, PtQueue *queue, PtClinicalData min) {
 
 	unsigned int size;
 	listSize(list, &size);
@@ -735,7 +738,7 @@ void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue, ClinicalDataStats min
 
 }
 
-void findMinAndMax(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue) {
+void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue, PtClinicalDataStats averageValue) {
 	int size;
 	ListElem patient;
 	listSize(list, &size);
@@ -770,5 +773,11 @@ void findMinAndMax(PtList list, PtClinicalDataStats minValue, PtClinicalDataStat
 		if (minValue->avgMcp1 > patient.clinicalData.mcp1) minValue->avgMcp1 = patient.clinicalData.mcp1;
 		if (maxValue->avgMcp1 < patient.clinicalData.mcp1) maxValue->avgMcp1 = patient.clinicalData.mcp1;
 	}
+
+	averageValue->avgAge = (minValue->avgAge + maxValue->avgAge) / 2;
+	averageValue->avgBmi = (minValue->avgBmi + maxValue->avgBmi) / 2;
+	averageValue->avgGlucose = (minValue->avgGlucose + maxValue->avgGlucose) / 2;
+	averageValue->avgInsulin = (minValue->avgInsulin + maxValue->avgInsulin) / 2;
+	averageValue->avgMcp1 = (minValue->avgMcp1 + maxValue->avgMcp1) / 2;
 
 }

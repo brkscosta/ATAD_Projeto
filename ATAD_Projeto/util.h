@@ -36,9 +36,10 @@ void averageClinicalData(PtList patients, PtMap* map);
 /*
 
 */
-void addToQueueStatsMinMaxAge(PtList list, PtQueue *queue, ClinicalDataStats min, ClinicalDataStats max);
+void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats max);
 
 /*
+
 
 */
 int nextCommand(PtQueue patients);
@@ -134,7 +135,6 @@ PtList copyPtList(PtList list);
 /*
 Procura na lista o valor medio minimo e maximo de cada atribuito Clinical Data
 */
-void findMinAndMax(PtList list, PtClinicalData minValue, PtClinicalData maxValue);
-
+void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue, PtClinicalDataStats averageValue);
 
 
