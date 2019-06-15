@@ -506,8 +506,6 @@ int nextCommand(PtQueue patients) {
 	return 0;
 }
 
-
-
 void clrscr()
 {
 	system("@cls||clear");
@@ -720,7 +718,6 @@ void addToQueue(PtList list, PtQueue *queue, PtClinicalData min) {
 	unsigned int size;
 	listSize(list, &size);
 	ListElem patientList;
-
 
 	int count = 0;
 
