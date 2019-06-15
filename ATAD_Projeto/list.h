@@ -131,8 +131,15 @@ LIST_OK em caso de sucesso;
 int listClear(PtList list);
 
 /*
-Mostra informação sobre uma instância
+Mostra informação sobre uma instância com a formatação dos dados normalizados
 Argumentos:
 list - referência da instância;
 */
 void listPrint(PtList list);
+
+/*
+Mostra informação sobre uma instância
+Argumentos:
+list - referência da instância;
+*/
+void listNormPrint(PtList list);

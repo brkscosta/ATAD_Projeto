@@ -39,11 +39,9 @@ int main(int argc, char** argv) {
 		command[strlen(command) - 1] = '\0';
 
 		if (equalsStringIgnoreCase(command, "QUIT")) {
-			quit = 1; /* vai provocar a saída do interpretador */
+			quit = 1;
 		}
 		else if (equalsStringIgnoreCase(command, "LOAD")) {
-			/* invocação da função responsável pela respetiva
-			funcionalidade. Remover printf seguinte após implementação */
 			load(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "CLEAR")) {
@@ -79,7 +77,12 @@ int main(int argc, char** argv) {
 			else avg(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NORM")) {
-			printf("Comando NORM nao implementado.\n");
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else norm(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "QUEUE")) {
 			if (listIsEmpty(listPatients) == 1) {
@@ -101,7 +104,12 @@ int main(int argc, char** argv) {
 			loadt(&listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NORMT")) {
-			printf("Comando NORMT nao implementado.\n");
+			if (listIsEmpty(listPatients) == 1) {
+				clrscr();
+				printf("\033[0;31m Unloaded data\n");
+				printf("\033[0m");
+			}
+			else normt(listPatients);
 		}
 		else if (equalsStringIgnoreCase(command, "NEURALNET")) {
 			printf("Comando NEURALNET nao implementado.\n");

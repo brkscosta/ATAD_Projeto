@@ -11,8 +11,12 @@ void show(PtList patients);
 void clear(PtList patients);
 void sort(PtList *patients);
 void avg(PtList patients);
+void averageClinicalData(PtList patients, PtMap* map);
 void checkDistrict(PtList patients);
 void queue(PtList patients);
+void norm(PtList patients);
+void normt(PtList patients);
+PtList normalizeClinicalData(PtList patients, int k);
 
 //FUNCOES AUXILIARES
 
@@ -29,20 +33,15 @@ Idade
 float getAge(Date date1, Date date2);
 
 /*
-
-*/
-void averageClinicalData(PtList patients, PtMap* map);
-
-/*
-
+Copiar para uma instância do TAD Queue todos os pacientes que se enquadrem nos seguintes critérios
+-A  sua  idade  seja  inferior  ao  valor  médio  do  intervalo  [min(age),  max(age)]  das idades de todos os pacientes.
+ou
+-A sua idade seja superior ao valor médio do intervalo [min(age),max(age)] das idades de todos os pacientes.
+-O valor dos atributos bmi, glucose, insuline e mcp1 sejam inferiores
+ao valor médio do intervalo entre o [min(atr),max(atr)] para cada um destes 4 atributros.
 */
 void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats max);
 
-/*
-
-
-*/
-int nextCommand(PtQueue patients);
 
 /*
 Devolve o rank do paciente
@@ -136,5 +135,18 @@ PtList copyPtList(PtList list);
 Procura na lista o valor medio minimo e maximo de cada atribuito Clinical Data
 */
 void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue, PtClinicalDataStats averageValue);
+
+
+/*
+Calculo da normalização
+Recebe:
+x o valor atual do atributo,
+o min o valor medio minimo do atributo,
+max o valor medio maximo do atributo e
+k o valor introduzido pelo utilizador
+Retorno:
+valor normalizado
+*/
+float calculateNorm(float x, float min, float max, float k);
 
 

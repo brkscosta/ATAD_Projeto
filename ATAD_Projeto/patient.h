@@ -11,7 +11,7 @@ typedef char String[255];
 
 
 typedef struct clinicalData {
-	int age;				/* Média da idade em anos quando os dados foram obtidos */
+	float age;				/* Média da idade em anos quando os dados foram obtidos */
 	float bmi;				/* Valores médios do Imc- Indice Massa corporal médio (Kg/m2) */
 	float glucose;			/* Valores médios da Glicose (mg/dl) */
 	float insulin;			/* Valores médios da Insulina (µU/ml) */
@@ -23,6 +23,12 @@ typedef struct clinicalData {
 								4 – Sem Doença
 								Usado apenas na opcao NEURALNET*/
 	int clinicalDataCount;	/* Numero de vezes que os dados foram obtidos*/
+
+	/* Usado apenas na opcao NEURALNET */
+	float c1;
+	float c2;
+	float c3;
+	float c4;
 
 } ClinicalData;
 
@@ -69,6 +75,14 @@ Retorna:
 */
 void patientPrint(Patient patient);
 
+/*
+Mostra os dados do paciente com a formatação do norm
+Recebe:
+patient: Estrututa do tipo Paciente
+Retorna:
+ -------
+*/
+void patientNormPrint(Patient patient);
 /*
 Construtor para os dados clínicos
 Recebe:

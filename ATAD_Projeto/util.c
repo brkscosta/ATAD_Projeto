@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "util.h"
+#include <ctype.h>
 
 void load(PtList *patients) {
 	clrscr();
@@ -17,14 +18,15 @@ void load(PtList *patients) {
 	printf("\033[0m");
 
 	do {
-		/*printf("\n\nImport patient file (file name): ");
+		printf("\n\nImport patient file (file name): ");
 		fgets(filename, sizeof(filename), stdin);
 
-		filename[strlen(filename) - 1] = '\0';*/
+		filename[strlen(filename) - 1] = '\0';
 
-		if (filename == "BACK") return;
+		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
 
-		error = fopen_s(&fPatient, "patients.csv", "r");
+		//error = fopen_s(&fPatient, "patients.csv", "r"); 
+		error = fopen_s(&fPatient, filename, "r");
 		if (error != 0) {
 			printf("\n\n \033[0;31m An error occurred... It was not possible to open the file %s ...\n", filename);
 			printf("\033[0m");
@@ -32,14 +34,15 @@ void load(PtList *patients) {
 	} while (error != 0);
 
 	do {
-		/*printf("\n\nImport Clinical Data file (file name): ");
+		printf("\n\nImport Clinical Data file (file name): ");
 		fgets(filename, sizeof(filename), stdin);
 
-		filename[strlen(filename) - 1] = '\0';*/
+		filename[strlen(filename) - 1] = '\0';
 
-		if (filename == "BACK") return;
+		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
 
-		error = fopen_s(&fClinicalData, "clinicalData.csv", "r");
+		//error = fopen_s(&fClinicalData, "clinicalData.csv", "r");
+		error = fopen_s(&fClinicalData, filename, "r");
 		if (error != 0) {
 			printf("\n\n \033[0;31m An error occurred... It was not possible to open the file %s ...\n", filename);
 			printf("\033[0m");
@@ -158,14 +161,15 @@ void loadt(PtList *patients) {
 	printf("\033[0m");
 
 	do {
-		/*printf("\n\nImport patient file (file name): ");
+		printf("\n\nImport patient file (file name): ");
 		fgets(filename, sizeof(filename), stdin);
 
-		filename[strlen(filename) - 1] = '\0';*/
+		filename[strlen(filename) - 1] = '\0';
 
-		if (filename == "BACK") return;
+		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
 
-		error = fopen_s(&fPatient_train, "patients_train.csv", "r");
+		//error = fopen_s(&fPatient_train, "patients_train.csv", "r");
+		error = fopen_s(&fPatient_train, filename, "r");
 		if (error != 0) {
 			printf("\n\n \033[0;31m An error occurred... It was not possible to open the file %s ...\n", filename);
 			printf("\033[0m");
@@ -173,14 +177,15 @@ void loadt(PtList *patients) {
 	} while (error != 0);
 
 	do {
-		/*printf("\n\nImport Clinical Data file (file name): ");
+		printf("\n\nImport Clinical Data file (file name): ");
 		fgets(filename, sizeof(filename), stdin);
 
-		filename[strlen(filename) - 1] = '\0';*/
+		filename[strlen(filename) - 1] = '\0';
 
-		if (filename == "BACK") return;
+		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
 
-		error = fopen_s(&fClinicalData_train, "clinicalData_train.csv", "r");
+		//error = fopen_s(&fClinicalData_train, "clinicalData_train.csv", "r");
+		error = fopen_s(&fClinicalData_train, filename, "r");
 		if (error != 0) {
 			printf("\n\n \033[0;31m An error occurred... It was not possible to open the file %s ...\n", filename);
 			printf("\033[0m");
@@ -249,6 +254,11 @@ void loadt(PtList *patients) {
 			patientElem.clinicalData.insulin = calculateAVG(patientElem.clinicalData.insulin, atof(tokens[4]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.mcp1 = calculateAVG(patientElem.clinicalData.mcp1, atof(tokens[5]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.disease_type = atoi(tokens[6]);
+
+			patientElem.clinicalData.c1 = calculateAVG(patientElem.clinicalData.c1, atof(tokens[7]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.c2 = calculateAVG(patientElem.clinicalData.c2, atof(tokens[8]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.c3 = calculateAVG(patientElem.clinicalData.c3, atof(tokens[9]), patientElem.clinicalData.clinicalDataCount);
+			patientElem.clinicalData.c4 = calculateAVG(patientElem.clinicalData.c4, atof(tokens[10]), patientElem.clinicalData.clinicalDataCount);
 			patientElem.clinicalData.clinicalDataCount += 1;
 
 			listSet(*patients, rank, patientElem, &oldClinicalData);
@@ -435,79 +445,130 @@ void queue(PtList patients) {
 	printf("\n===================================================================================");
 	printf("\n                             QUEUE                                                  ");
 	printf("\n===================================================================================\n");
-	printf("Select command\n");
-	printf("next\n");
-	printf("stop\n");
+
 
 	PtQueue queuePatients = queueCreate(500);
-
-	/*ClinicalDataStats averageValue = clinicalDataStatsCreate();
-	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate();*/
 
 	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate(), averageValue = clinicalDataStatsCreate();
 	findMinAndMaxAndAVG(patients, &min, &max, &averageValue);
 
-	printf("Min(%f) Max(%f) Average(%f)\n", min.avgAge, max.avgAge, averageValue.avgAge);
-	printf("Min(%f) Max(%f) Average(%f)\n", min.avgBmi, max.avgBmi, averageValue.avgBmi);
-	printf("Min(%f) Max(%f) Average(%f)\n", min.avgGlucose, max.avgGlucose, averageValue.avgGlucose);
-	printf("Min(%f) Max(%f) Average(%f)\n", min.avgInsulin, max.avgInsulin, averageValue.avgInsulin);
-	printf("Min(%f) Max(%f) Average(%f)\n", min.avgMcp1, max.avgMcp1, averageValue.avgMcp1);
 	addToQueue(patients, &queuePatients, &averageValue);
-	queuePrint(queuePatients);
-	queueSize(queuePatients, &size1);
-	printf("%d\n", size1);
-	//do {
 
-	//	printf("COMMAND> ");
-	//	fgets(command, sizeof(command), stdin);
-	//	command[strlen(command) - 1] = '\0';
+	printf("Available commands: NEXT & STOP\n");
+	do {
 
-	//	if (strcmp(command, "next") == 0) {
-	//		int res = nextCommand(queuePatients);
+		printf("COMMAND> ");
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
 
-	//		if (res == 0) {
-	//			printf("\033[0;31m A fila está vazia.\n");
-	//			printf("\033[0m");
-	//			system("pause");
-	//			quit != 0;
-	//		}
+		if (strcmp(command, "NEXT") == 0) {
+			if (queueIsEmpty(queuePatients) == 1) {
+				printf("Queue is empty");
+				system("pause");
+				quit = 1;
+			}
+			ListElem queueElem;
+			queuePeek(queuePatients, &queueElem);
+			printf("          Indice BirthDate Sex Hospital                             District           Age  Bmi     Glicose Insulin  Mcp1\n\n");
+			queueElemPrint(queueElem);
+			queueDequeue(queuePatients, &queueElem);
+		}
+		else if (command == "STOP") {
+			system("pause");
+			quit = 1;
+		}
+		else {
+			printf("\033[0;31m Command not found.\n");
+			printf("\033[0m");
+		}
 
-	//		queuePrint(queue);
-	//	}
-	//	else if (command == "stop") {
-	//		printf("Terminando processo...\n\n");
-	//		system("pause");
-	//		quit = 1;
-	//		queueDestroy(&queuePatients);
-	//	}
-	//	else {
-	//		printf("\033[0;31m Comando not valid.\n");
-	//		printf("\033[0m");
-	//	}
-
-	//} while (quit != 1);
+	} while (quit != 1);
 	system("pause");
 	queueDestroy(&queuePatients);
 	clrscr();
 }
 
-int nextCommand(PtQueue patients) {
+void norm(PtList patients) {
+	char command[20];
+	int k;
+	int quit = 0;
+	clrscr();
+	printf("\n===================================================================================");
+	printf("\n                             NORM                                                  ");
+	printf("\n===================================================================================\n\n");
+	int size;
+	listSize(patients, &size);
+	PtList auxiliar = listCreate(size);
+	auxiliar = copyPtList(patients);
 
-	ListElem patient;
-	if (!queueIsEmpty(patients)) {
-		//Busca o que está em primeiro
-		queuePeek(patients, &patient);
+	printf(" \033[1;33mCommand \"BACK\" to return to the home menu \n");
+	printf("\033[0m");
+	printf("Enter the value of K(int)\n");
 
-		//Devolve o paciente
-		patientPrint(patient);
+	do {
+		printf("K> ");
+		fgets(command, sizeof(command), stdin);
+		command[strlen(command) - 1] = '\0';
+		k = atoi(command);
 
-		//Retira-o da fila
-		queueDequeue(patients, &patient);
+		if (k > 0) {
+			normalizeClinicalData(auxiliar, k);
+			listNormPrint(auxiliar);
+			quit = 1;
+		}
+		else if (strcmp(command, "BACK") == 0)
+		{
+			quit = 1;
+		}
+		else {
+			printf("\033[0;31m Is not a digit\n", k);
+			printf("\033[0m");
+		}
+	} while (quit != 1);
 
-		return 1;
+	printf("\n");
+	system("pause");
+	listDestroy(&auxiliar);
+	clrscr();
+}
+
+void normt(PtList patients) {
+	clrscr();
+	printf("\n===================================================================================");
+	printf("\n                             NORMT                                                  ");
+	printf("\n===================================================================================\n\n");
+	int size;
+	listSize(patients, &size);
+	PtList auxiliar = listCreate(size);
+	auxiliar = copyPtList(patients);
+	normalizeClinicalData(auxiliar, 5);
+	listNormPrint(auxiliar);
+	printf("\n");
+	system("pause");
+	listDestroy(&auxiliar);
+	clrscr();
+}
+
+PtList normalizeClinicalData(PtList patients, int k) {
+
+	int size;
+	ListElem elem, oldElem;
+
+	listSize(patients, &size);
+
+	ClinicalDataStats min = clinicalDataStatsCreate(), max = clinicalDataStatsCreate(), averageValue = clinicalDataStatsCreate();
+	findMinAndMaxAndAVG(patients, &min, &max, &averageValue);
+
+	for (int i = 0; i < size; i++) {
+		listGet(patients, i, &elem);
+		elem.clinicalData.age = calculateNorm(elem.clinicalData.age, min.avgAge, max.avgAge, k);
+		elem.clinicalData.bmi = calculateNorm(elem.clinicalData.bmi, min.avgBmi, max.avgBmi, k);
+		elem.clinicalData.glucose = calculateNorm(elem.clinicalData.glucose, min.avgGlucose, max.avgGlucose, k);
+		elem.clinicalData.insulin = calculateNorm(elem.clinicalData.insulin, min.avgInsulin, max.avgInsulin, k);
+		elem.clinicalData.mcp1 = calculateNorm(elem.clinicalData.mcp1, min.avgMcp1, max.avgMcp1, k);
+		listSet(patients, i, elem, &oldElem);
 	}
-
-	return 0;
+	return patients;
 }
 
 
@@ -728,9 +789,6 @@ void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats averageValue) {
 
 	for (int i = 0; i < size; i++) {
 		listGet(list, i, &patientList);
-		if (patientList.id == 19) {
-			printf("boas");
-		}
 		if (patientList.clinicalData.age < averageValue->avgAge) {
 			queueEnqueue(*queue, patientList);
 			count++;
@@ -748,7 +806,8 @@ void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats averageValue) {
 		}
 
 	}
-	printf("Adicionados %d pacientes a fila\n", count);
+	queuePrint(*queue);
+	printf("\n%d elements were copied to queue!\n\n", count);
 }
 
 void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDataStats maxValue, PtClinicalDataStats averageValue) {
@@ -793,4 +852,11 @@ void findMinAndMaxAndAVG(PtList list, PtClinicalDataStats minValue, PtClinicalDa
 	averageValue->avgInsulin = (minValue->avgInsulin + maxValue->avgInsulin) / 2;
 	averageValue->avgMcp1 = (minValue->avgMcp1 + maxValue->avgMcp1) / 2;
 
+}
+
+float calculateNorm(float x, float min, float max, float k) {
+	float value;
+
+	value = ((x - min) / (max - min)) * 2 * k - k;
+	return value;
 }

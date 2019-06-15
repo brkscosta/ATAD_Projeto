@@ -205,10 +205,11 @@ void queuePrint(PtQueue queue) {
 	}
 	else {
 		//imprimir do inicio para o fim da fila:
-		printf("Queue contents (begin to end): \n");
+		printf("          Indice BirthDate Sex Hospital                             District           Age  Bmi     Glicose Insulin  Mcp1\n\n");
+		printf("Queue State:\n----inicio----\n");
 		for (unsigned int i = 0; i < queue->size; i++) {
 			queueElemPrint(queue->elements[i]);
 		}
-		printf("------------------------------ \n");
+		printf("---- fim ----\n");
 	}
 }

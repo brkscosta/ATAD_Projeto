@@ -21,6 +21,11 @@ Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char 
 	newClinicalData.disease_type = 0;
 	newClinicalData.clinicalDataCount = 0;
 
+	newClinicalData.c1 = 0;
+	newClinicalData.c2 = 0;
+	newClinicalData.c3 = 0;
+	newClinicalData.c4 = 0;
+
 	newPatient.clinicalData = newClinicalData;
 
 	return newPatient;
@@ -28,7 +33,7 @@ Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char 
 }
 
 void patientPrint(Patient patient) {
-	printf("%3d %02d/%02d/%02d %c %-35s  %-16s    %2d %8.4f %6.1f %8.4f %10.4f \n",
+	printf("%3d %02d/%02d/%02d %c %-35s  %-16s    %2.0f %8.4f %6.1f %8.4f %10.4f \n",
 		patient.id,
 		patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
 		patient.gender,
@@ -41,6 +46,15 @@ void patientPrint(Patient patient) {
 		patient.clinicalData.mcp1);
 }
 
+void patientNormPrint(Patient patient) {
+	printf("%3d   %5.2f %5.2f  %5.2f    %5.2f    %5.2f \n",
+		patient.id,
+		patient.clinicalData.age,
+		patient.clinicalData.bmi,
+		patient.clinicalData.glucose,
+		patient.clinicalData.insulin,
+		patient.clinicalData.mcp1);
+}
 ClinicalDataStats clinicalDataStatsCreate() {
 
 	ClinicalDataStats newClinicalDataStats;

@@ -234,3 +234,24 @@ void listPrint(PtList list) {
 
 	}
 }
+
+/*
+Mostra informação sobre uma instância com a formatação dos dados normalizados
+Argumentos:
+list - referência da instância;
+*/
+void listNormPrint(PtList list) {
+
+	if (list == NULL)
+		printf("LIST NULL \n");
+	else if ( /*listIsEmpty(list)*/ list->size == 0)
+		printf("LIST EMPTY \n");
+	else {
+		printf("Ind.  Age    Bmi    Glicose Insulin  Mcp1\n\n");
+		//printf("Indice Age   Bmi   Glicose Insulin  Mcp1\n\n");
+		for (int rank = 0; rank < list->size; rank++) {
+			listElemNormPrint(list->elements[rank]);
+		}
+
+	}
+}
