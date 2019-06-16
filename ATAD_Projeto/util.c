@@ -473,8 +473,7 @@ void queue(PtList patients) {
 			queueElemPrint(queueElem);
 			queueDequeue(queuePatients, &queueElem);
 		}
-		else if (command == "STOP") {
-			system("pause");
+		else if (strcmp(command, "STOP") == 0) {
 			quit = 1;
 		}
 		else {
@@ -570,8 +569,6 @@ PtList normalizeClinicalData(PtList patients, int k) {
 	}
 	return patients;
 }
-
-
 
 void clrscr()
 {
