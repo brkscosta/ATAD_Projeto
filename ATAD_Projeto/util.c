@@ -514,12 +514,10 @@ void norm(PtList patients) {
 			normalizeClinicalData(auxiliar, k);
 			listNormPrint(auxiliar);
 			quit = 1;
-		}
-		else if (strcmp(command, "BACK") == 0)
+		} else if (strcmp(command, "BACK") == 0)
 		{
 			quit = 1;
-		}
-		else {
+		} else {
 			printf("\033[0;31m Is not a digit\n", k);
 			printf("\033[0m");
 		}
