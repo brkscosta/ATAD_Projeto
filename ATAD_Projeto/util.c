@@ -153,9 +153,9 @@ void loadt(PtList *patients) {
 	printf("\n                          LOADT                                                    ");
 	printf("\n===================================================================================\n");
 
-	FILE *fPatient_train, *fClinicalData_train;
+	FILE* fPatient_train;
 	int error = 0;
-	char filename[20];
+	char filename[30];
 
 	printf(" \033[1;33mCommand \"BACK\" to return to the home menu \n");
 	printf("\033[0m");
@@ -168,18 +168,18 @@ void loadt(PtList *patients) {
 
 		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
 
-		//error = fopen_s(&fPatient_train, "patients_train.csv", "r");
-		error = fopen_s(&fPatient_train, filename, "r");
+		error = fopen_s(&fPatient_train, "patients_train.csv", "r");
+		//error = fopen_s(&fPatient_train, filename, "r");
 		if (error != 0) {
 			printf("\n\n \033[0;31m An error occurred... It was not possible to open the file %s ...\n", filename);
 			printf("\033[0m");
 		}
 	} while (error != 0);
-
+	FILE* fClinicalData_train;
 	do {
 		printf("\n\nImport Clinical Data file (file name): ");
 		fgets(filename, sizeof(filename), stdin);
-
+		
 		filename[strlen(filename) - 1] = '\0';
 
 		if (strcmp(filename, "BACK") == 0) { clrscr();  return; }
@@ -568,8 +568,7 @@ PtList normalizeClinicalData(PtList patients, int k) {
 	return patients;
 }
 
-void clrscr()
-{
+void clrscr() {
 	system("@cls||clear");
 }
 
