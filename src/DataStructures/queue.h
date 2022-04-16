@@ -17,93 +17,93 @@ Cria uma nova instancia de Queue
 Recebe
 initialCapacity - capacidade inicial
 Retorna
-referência da instância ou
-NULL no caso de inexistência de memória.
+referÃªncia da instÃ¢ncia ou
+NULL no caso de inexistï¿½ncia de memÃ³ria.
 */
 PtQueue queueCreate(unsigned int initialCapacity);
 
 /* 
-Destroi uma instância, libertando a memória associada.
+Destroi uma instÃ¢ncia, libertando a memÃ³ria associada.
 Argumentos:
-ptQueue - endereço da referência da instância;
+ptQueue - endereï¿½o da referÃªncia da instÃ¢ncia;
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queueDestroy(PtQueue *ptQueue);
 
 /*
-Insere um elemento no fim da fila numa dada instância.
+Insere um elemento no fim da fila numa dada instÃ¢ncia.
 Argumentos:
-queue - referência da instância;
+queue - referÃªncia da instÃ¢ncia;
 elem - elemento a inserir na fila;
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_FULL caso a fila esteja cheia, ou;
-QUEUE_NO_MEMORY caso nao haja memória para guardar o elemento, ou;
+QUEUE_NO_MEMORY caso nao haja memÃ³ria para guardar o elemento, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queueEnqueue(PtQueue queue, QueueElem elem);
 
 /*
-Retira do inicio da fila um elemento numa dada instância.
+Retira do inicio da fila um elemento numa dada instÃ¢ncia.
 Argumentos:
-stack - referência da instância;
-ptElem - elemento removido (retorno por referência);
+stack - referÃªncia da instÃ¢ncia;
+ptElem - elemento removido (retorno por referÃªncia);
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_EMPTY caso a fila esteja vazia, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queueDequeue(PtQueue queue, QueueElem *ptElem);
 
 /*
-Espreita o elemento do fim numa dada instância.
+Espreita o elemento do fim numa dada instÃ¢ncia.
 Argumentos:
-queue - referência da instância;
-ptElem - elemento no topo (retorno por referência);
+queue - referÃªncia da instÃ¢ncia;
+ptElem - elemento no topo (retorno por referÃªncia);
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_EMPTY caso a fila esteja vazia, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queuePeek(PtQueue queue, QueueElem *ptElem);
 
 /*
-Quantos elementos estão armazenados numa instância.
+Quantos elementos estÃ£o armazenados numa instÃ¢ncia.
 Argumentos:
-queue - referência da instância;
-ptSize - número de elementos (retorno por referência);
+queue - referÃªncia da instÃ¢ncia;
+ptSize - nï¿½mero de elementos (retorno por referÃªncia);
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queueSize(PtQueue queue, int *ptSize);
 
 /*
-Verifica se a instância está vazia (não contém elementos)
+Verifica se a instÃ¢ncia estï¿½ vazia (nï¿½o contï¿½m elementos)
 Argumentos:
-queue - referência da instância;
+queue - referÃªncia da instÃ¢ncia;
 Retorno:
-1 caso esteja vazia ou a referência seja NULL, ou;
-0 caso não esteja vazia;
+1 caso esteja vazia ou a referÃªncia seja NULL, ou;
+0 caso nÃ£o esteja vazia;
 */
 int queueIsEmpty(PtQueue queue);
 
 /*
-Limpa uma instância (remove todos os elementos)
+Limpa uma instÃ¢ncia (remove todos os elementos)
 Argumentos:
-queue - referência da instância;
+queue - referÃªncia da instÃ¢ncia;
 Retorno:
-QUEUE_NULL se a referência recebida for NULL, ou;
+QUEUE_NULL se a referÃªncia recebida for NULL, ou;
 QUEUE_OK em caso de sucesso;
 */
 int queueClear(PtQueue queue);
 
 /*
-Mostra informação sobre uma instância
+Mostra informaÃ§Ã£o sobre uma instÃ¢ncia
 Argumentos:
-stack - referência da instância;
+stack - referÃªncia da instÃ¢ncia;
 */
 void queuePrint(PtQueue queue);
 

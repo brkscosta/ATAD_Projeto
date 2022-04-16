@@ -80,7 +80,7 @@ void load(PtList patients) {
         sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
         char gender = tokens[2][0];
         tokens[4][strlen(tokens[4]) - 1] = '\0';
-        ListElem patient = patientCreate(
+        ListElem patient = Patient(
             id, dateCreate(day, month, year), gender, tokens[3], tokens[4]);
         listAdd(patients, countPatient, patient);
         free(tokens);
@@ -223,7 +223,7 @@ void loadt(PtList patients) {
         sscanf_s(tokens[1], "%d/%d/%d", &day, &month, &year);
         char gender = tokens[2][0];
         tokens[4][strlen(tokens[4]) - 1] = '\0';
-        ListElem patient = patientCreate(
+        ListElem patient = Patient(
             id, dateCreate(day, month, year), gender, tokens[3], tokens[4]);
         listAdd(patients, countPatient, patient);
         free(tokens);

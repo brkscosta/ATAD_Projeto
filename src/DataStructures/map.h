@@ -7,78 +7,78 @@
 #define MAP_FULL          4
 #define MAP_UNKNOWN_KEY	  5
 
-/* Contem definição do tipo a guardar na map */
+/* Contem definiÃ§Ã£o do tipo a guardar na map */
 #include "mapElem.h"
 
-/* Forward declaration do registo (representação dos dados)
-da map.
+/* Forward declaration do registo (representaÃ§Ã£o dos dados)
+do map.
 Tem de estar definida em concreto num ficheiro *.c aquando
-da compilação do programa.
+da compilaÃ§Ã£o do programa.
 */
 struct mapImpl;
 
-/* Definicao de referência para uma instância de map */
+/* DefiniÃ§Ã£o de referÃªncia para uma instÃ¢ncia de map */
 typedef struct mapImpl *PtMap;
 
 /*
-Cria uma nova instância da Map.
+Cria uma nova instÃ¢ncia da Map.
 Recebe:
-initialCapacity - capacidade inicial (se aplicável)
+initialCapacity - capacidade inicial (se aplicï¿½vel)
 Retorno:
-referência da instância ou;
-NULL no caso de inexistência de memória.
+referÃªncia da instÃ¢ncia ou;
+NULL no caso de inexistï¿½ncia de memÃ³ria.
 */
 PtMap mapCreate(unsigned int initialCapacity);
 
 /*
-Destroi uma instância, libertando a memória associada.
+Destroi uma instÃ¢ncia, libertando a memÃ³ria associada.
 Argumentos:
-ptMap - endereço da referência da instância;
+ptMap - endereÃ§o da referÃªncia da instÃ¢ncia;
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_OK em caso de sucesso;
 */
 int mapDestroy(PtMap *ptMap);
 
 /*
-Adiciona um mapeamento numa dada instância. Se a chave
-já existir, atualiza o valor mapeado.
+Adiciona um mapeamento numa dada instÃ¢ncia. Se a chave
+jÃ¡ existir, atualiza o valor mapeado.
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 key - chave do mapeamento;
 value - valor mapeado;
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_FULL caso o mapa esteja cheio, ou;
-MAP_NO_MEMORY caso nao haja memória para guardar o elemento, ou;
+MAP_NO_MEMORY caso nao haja memÃ³ria para guardar o elemento, ou;
 MAP_OK em caso de sucesso;
 */
 int mapPut(PtMap map, MapKey key, MapValue value);
 
 /*
-Remove um mapeamento de uma dada instância.
+Remove um mapeamento de uma dada instÃ¢ncia.
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 key - chave do mapeamento;
-ptValue - valor removido (retorno por referência);
+ptValue - valor removido (retorno por referÃªncia);
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_EMPTY caso o mapa esteja vazio, ou;
-MAP_UNKNOWN_KEY caso a chave não exista no mapa, ou;
+MAP_UNKNOWN_KEY caso a chave nï¿½o exista no mapa, ou;
 MAP_OK em caso de sucesso;
 */
 int mapRemove(PtMap map, MapKey key, MapValue *ptValue);
 
 /*
-Obtem um valor mapeado de uma dada instância.
+Obtem um valor mapeado de uma dada instÃ¢ncia.
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 key - chave do mapeamento;
-ptValue - valor mapeado (retorno por referência);
+ptValue - valor mapeado (retorno por referÃªncia);
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_EMPTY caso o mapa esteja vazio, ou;
-MAP_UNKNOWN_KEY caso a chave não exista no mapa, ou;
+MAP_UNKNOWN_KEY caso a chave nÃ£o exista no mapa, ou;
 MAP_OK em caso de sucesso;
 */
 int mapGet(PtMap map, MapKey key, MapValue *ptValue);
@@ -86,18 +86,18 @@ int mapGet(PtMap map, MapKey key, MapValue *ptValue);
 /*
 Verifica se uma chave faz parte do mapa.
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 key - chave do mapeamento;
 Retorno:
 1 se existir a chave;
-0 se não existir ou o mapa for NULL;
+0 se nï¿½o existir ou o mapa for NULL;
 */
 int mapContains(PtMap map, MapKey key);
 
 /*
 Permite saber o conjunto de chaves contidas num map.
 Argumentos:
-map - referência da instância
+map - referÃªncia da instÃ¢ncia
 Retorno:
 NULL caso o map seja NULL ou a instancia esteja vazia
 Um array (alocado dinamicamente) contendo todas as chaves atualmente
@@ -108,7 +108,7 @@ MapKey* mapKeys(PtMap map);
 /*
 Permite saber o conjunto de valores contidos num map.
 Argumentos:
-map - referência da instância
+map - referÃªncia da instÃ¢ncia
 Retorno:
 NULL caso o map seja NULL ou a instancia esteja vazia
 Um array (alocado dinamicamente) contendo todas os valores atualmente
@@ -117,40 +117,40 @@ no mapa
 MapValue* mapValues(PtMap map);
 
 /*
-Quantos elementos estão armazenados numa instância.
+Quantos elementos estÃ£o armazenados numa instÃ¢ncia.
 Argumentos:
-map - referência da instância;
-ptSize - número de elementos (retorno por referência);
+map - referÃªncia da instÃ¢ncia;
+ptSize - nï¿½mero de elementos (retorno por referÃªncia);
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_OK em caso de sucesso;
 */
 int mapSize(PtMap map, int *ptSize);
 
 /*
-Verifica se a instância está vazia (não contém elementos)
+Verifica se a instÃ¢ncia estÃ¡ vazia (nÃ£o contÃ©m elementos)
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 Retorno:
-1 caso esteja vazia ou a referência seja NULL, ou;
-0 caso não esteja vazia;
+1 caso esteja vazia ou a referÃªncia seja NULL, ou;
+0 caso nï¿½o esteja vazia;
 */
 int mapIsEmpty(PtMap map);
 
 /*
-Limpa uma instância (remove todos os elementos)
+Limpa uma instÃ¢ncia (remove todos os elementos)
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 Retorno:
-MAP_NULL se a referência recebida for NULL, ou;
+MAP_NULL se a referÃªncia recebida for NULL, ou;
 MAP_OK em caso de sucesso;
 */
 int mapClear(PtMap map);
 
 /*
-Mostra informação sobre uma instância
+Mostra informaÃ§Ã£o sobre uma instÃ¢ncia
 Argumentos:
-map - referência da instância;
+map - referÃªncia da instÃ¢ncia;
 */
 void mapPrint(PtMap map);
 

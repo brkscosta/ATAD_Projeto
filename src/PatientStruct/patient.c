@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include "patient.h"
 
-
-Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char *district)
+PatientModel Patient(int id, Date birthdate, char gender, char *hospital, char *district)
 {
-    Patient newPatient;
+    PatientModel newPatient;
     newPatient.id = id;
     newPatient.birthdate = birthdate;
     newPatient.gender = gender;
@@ -32,7 +31,7 @@ Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char 
 
 }
 
-void patientPrint(Patient patient) {
+void patientPrint(PatientModel patient) {
     printf("%3d %02d/%02d/%02d %c %-35s  %-16s    %2.0f %8.4f %6.1f %8.4f %10.4f \n",
         patient.id,
         patient.birthdate.day, patient.birthdate.month, patient.birthdate.year,
@@ -46,7 +45,7 @@ void patientPrint(Patient patient) {
         patient.clinicalData.mcp1);
 }
 
-void patientNormPrint(Patient patient) {
+void patientNormPrint(PatientModel patient) {
     printf("%3d   %5.2f %5.2f  %5.2f    %5.2f    %5.2f \n",
         patient.id,
         patient.clinicalData.age,
@@ -55,6 +54,7 @@ void patientNormPrint(Patient patient) {
         patient.clinicalData.insulin,
         patient.clinicalData.mcp1);
 }
+
 ClinicalDataStats clinicalDataStatsCreate() {
 
     ClinicalDataStats newClinicalDataStats;
@@ -67,7 +67,6 @@ ClinicalDataStats clinicalDataStatsCreate() {
 
     return newClinicalDataStats;
 }
-
 
 void clinicalDataStatsPrint(ClinicalDataStats *clinicalDataStats) {
     printf("%5.1f  %8.4f   %3.0f    %8.4f  %10.4f\n",

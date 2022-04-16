@@ -26,7 +26,6 @@ int findKeyIndex(PtMap map, MapKey key) {
     return -1;
 }
 
-/* Operacoes gen�ricas */
 PtMap mapCreate(unsigned int initialCapacity) {
     PtMap newMap = (PtMap)malloc(sizeof(MapImpl));
     if (newMap == NULL) return NULL;
@@ -89,7 +88,6 @@ void mapPrint(PtMap map) {
     }
 }
 
-/* Operacoes espec�ficas */
 int mapPut(PtMap map, MapKey key, MapValue value) {
     if (map == NULL) return MAP_NULL;
 
@@ -133,16 +131,6 @@ int mapContains(PtMap map, MapKey key) {
     if (map == NULL) return 0;
 
     return findKeyIndex(map, key) != -1;
-
-    /*
-    for (int i = 0; i < map->size; i++) {
-
-        if ( mapKeyCompare(map->elements[i].key , key) ) {
-            return 1;
-        }
-    }
-
-    return 0;*/
 }
 
 int mapGet(PtMap map, MapKey key, MapValue *ptValue) {
@@ -157,15 +145,6 @@ int mapGet(PtMap map, MapKey key, MapValue *ptValue) {
     else {
         return MAP_UNKNOWN_KEY;
     }
-    /*for (int i = 0; i < map->size; i++) {
-
-        if (mapKeyCompare(map->elements[i].key, key)) {
-            *ptValue = map->elements[i].value;
-            return MAP_OK;
-        }
-    }
-
-    return MAP_UNKNOWN_KEY;*/
 }
 
 MapKey* mapKeys(PtMap map) {

@@ -19,10 +19,8 @@ void printCommandsMenu();
 
 int main() {
 
-    /* declaracao de variaveis */
     PtList listPatients = listCreate(500);
 
-    /* interpretador de comandos */
     String command;
     int quit = 0;
 
@@ -30,6 +28,7 @@ int main() {
     while (!quit) {
         printCommandsMenu();
         fgets(command, sizeof(command), stdin);
+
         /* descartar 'newline'. Utilizar esta técnica sempre que for lida uma
         * string para ser utilizada, e.g., nome de ficheiro, chave, etc.. */
         command[strlen(command) - 1] = '\0';

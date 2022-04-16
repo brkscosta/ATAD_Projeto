@@ -7,139 +7,139 @@
 #define LIST_FULL			4
 #define LIST_INVALID_RANK	5
 
-/* Contem definição do tipo a guardar na list */
+/* Contem definiï¿½ï¿½o do tipo a guardar na list */
 #include "listElem.h"
 
-/* Forward declaration do registo (representação dos dados)
+/* Forward declaration do registo (representaï¿½ï¿½o dos dados)
 da list.
 Tem de estar definida em concreto num ficheiro *.c aquando
-da compilação do programa.
+da compilaï¿½ï¿½o do programa.
 */
 struct listImpl;
 
-/* Definicao de referência para uma instância da list */
+/* Definicao de referï¿½ncia para uma instï¿½ncia da list */
 typedef struct listImpl *PtList;
 
 /*
-Cria uma nova instância da List.
+Cria uma nova instï¿½ncia da List.
 Recebe:
-initialCapacity - capacidade inicial (se aplicável)
+initialCapacity - capacidade inicial (se aplicï¿½vel)
 Retorno:
-referência da instância ou;
-NULL no caso de inexistência de memória.
+referï¿½ncia da instï¿½ncia ou;
+NULL no caso de inexistï¿½ncia de memï¿½ria.
 */
 PtList listCreate(unsigned int initialCapacity);
 
 /*
-Destroi uma instância, libertando a memória associada.
+Destroi uma instï¿½ncia, libertando a memï¿½ria associada.
 Argumentos:
-ptList - endereço da referência da instância;
+ptList - endereï¿½o da referï¿½ncia da instï¿½ncia;
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_OK em caso de sucesso;
 */
 int listDestroy(PtList *ptList);
 
 /*
-Adiciona um elemento numa dada instância.
+Adiciona um elemento numa dada instï¿½ncia.
 Argumentos:
-list - referência da instância;
-rank - o rank/índice para a operação (0 >= r <= size);
+list - referï¿½ncia da instï¿½ncia;
+rank - o rank/ï¿½ndice para a operaï¿½ï¿½o (0 >= r <= size);
 elem - elemento a emlistar;
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_FULL caso a lista esteja cheia, ou;
-LIST_NO_MEMORY caso nao haja memória para guardar o elemento, ou;
-LIST_INVALID_RANK caso o rank seja inválido para a operação, ou;
+LIST_NO_MEMORY caso nao haja memï¿½ria para guardar o elemento, ou;
+LIST_INVALID_RANK caso o rank seja invï¿½lido para a operaï¿½ï¿½o, ou;
 LIST_OK em caso de sucesso;
 */
 int listAdd(PtList list, int rank, ListElem elem);
 
 /*
-Remove um elemento de uma dada instância.
+Remove um elemento de uma dada instï¿½ncia.
 Argumentos:
-list - referência da instância;
-rank - o rank/índice para a operação  (0 >= r <= size - 1);
-ptElem - elemento removido (retorno por referência);
+list - referï¿½ncia da instï¿½ncia;
+rank - o rank/ï¿½ndice para a operaï¿½ï¿½o  (0 >= r <= size - 1);
+ptElem - elemento removido (retorno por referï¿½ncia);
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_EMPTY caso a lista esteja vazia, ou;
-LIST_INVALID_RANK caso o rank seja inválido para a operação, ou;
+LIST_INVALID_RANK caso o rank seja invï¿½lido para a operaï¿½ï¿½o, ou;
 LIST_OK em caso de sucesso;
 */
 int listRemove(PtList list, int rank, ListElem *ptElem);
 
 /*
-Obtem o elemento no rank de uma dada instância.
+Obtem o elemento no rank de uma dada instï¿½ncia.
 Argumentos:
-list - referência da instância;
-rank - o rank/índice para a operação  (0 >= r <= size - 1);
-ptElem - elemento no rank (retorno por referência);
+list - referï¿½ncia da instï¿½ncia;
+rank - o rank/ï¿½ndice para a operaï¿½ï¿½o  (0 >= r <= size - 1);
+ptElem - elemento no rank (retorno por referï¿½ncia);
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_EMPTY caso a lista esteja vazia, ou;
-LIST_INVALID_RANK caso o rank seja inválido para a operação, ou;
+LIST_INVALID_RANK caso o rank seja invï¿½lido para a operaï¿½ï¿½o, ou;
 LIST_OK em caso de sucesso;
 */
 int listGet(PtList list, int rank, ListElem *ptElem);
 
 /*
-Substitui o elemento no rank de uma dada instância, retornando o
+Substitui o elemento no rank de uma dada instï¿½ncia, retornando o
 elemento substituido.
 Argumentos:
-list - referência da instância;
-rank - o rank/índice para a operação  (0 >= r <= size - 1);
+list - referï¿½ncia da instï¿½ncia;
+rank - o rank/ï¿½ndice para a operaï¿½ï¿½o  (0 >= r <= size - 1);
 elem - elemento a inserir no rank;
-ptOldElem - elemento anterior no rank (retorno por referência);
+ptOldElem - elemento anterior no rank (retorno por referï¿½ncia);
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_EMPTY caso a lista esteja vazia, ou;
-LIST_INVALID_RANK caso o rank seja inválido para a operação, ou;
+LIST_INVALID_RANK caso o rank seja invï¿½lido para a operaï¿½ï¿½o, ou;
 LIST_OK em caso de sucesso;
 */
 int listSet(PtList list, int rank, ListElem elem, ListElem *ptOldElem);
 
 /*
-Quantos elementos estão armazenados numa instância.
+Quantos elementos estï¿½o armazenados numa instï¿½ncia.
 Argumentos:
-list - referência da instância;
-ptSize - número de elementos (retorno por referência);
+list - referï¿½ncia da instï¿½ncia;
+ptSize - nï¿½mero de elementos (retorno por referï¿½ncia);
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referï¿½ncia recebida for NULL, ou;
 LIST_OK em caso de sucesso;
 */
 int listSize(PtList list, int *ptSize);
 
 /*
-Verifica se a instância está vazia (não contém elementos)
+Verifica se a instï¿½ncia estï¿½ vazia (nï¿½o contï¿½m elementos)
 Argumentos:
-list - referência da instância;
+list - referï¿½ncia da instï¿½ncia;
 Retorno:
-1 caso esteja vazia ou a referência seja NULL, ou;
-0 caso não esteja vazia;
+1 caso esteja vazia ou a referï¿½ncia seja NULL, ou;
+0 caso nï¿½o esteja vazia;
 */
 int listIsEmpty(PtList list);
 
 /*
-Limpa uma instância (remove todos os elementos)
+Limpa uma instÃ¢ncia (remove todos os elementos)
 Argumentos:
-list - referência da instância;
+list - referÃªncia da instÃ¢ncia;
 Retorno:
-LIST_NULL se a referência recebida for NULL, ou;
+LIST_NULL se a referÃªncia recebida for NULL, ou;
 LIST_OK em caso de sucesso;
 */
 int listClear(PtList list);
 
 /*
-Mostra informação sobre uma instância com a formatação dos dados normalizados
+Mostra informaÃ§Ã£o sobre uma instÃ¢ncia com a formataÃ§Ã£o dos dados normalizados
 Argumentos:
-list - referência da instância;
+list - referÃªncia da instÃ¢ncia;
 */
 void listPrint(PtList list);
 
 /*
-Mostra informação sobre uma instância
+Mostra informaÃ§Ã£o sobre uma instÃ¢ncia
 Argumentos:
-list - referência da instância;
+list - referÃªncia da instÃ¢ncia;
 */
 void listNormPrint(PtList list);

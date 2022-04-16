@@ -9,47 +9,46 @@
 
 typedef char String[255];
 
-
 typedef struct clinicalData {
-	float age;				/* M�dia da idade em anos quando os dados foram obtidos */
-	float bmi;				/* Valores m�dios do Imc- Indice Massa corporal m�dio (Kg/m2) */
-	float glucose;			/* Valores m�dios da Glicose (mg/dl) */
-	float insulin;			/* Valores m�dios da Insulina (�U/ml) */
-	float mcp1;				/* Valores m�dios da Proteina MCP-1 (pg/ml)*/
-	int disease_type;		/* Classificacao do Doente
-								1 � Doen�a1
-								2 � Doen�a2
-								3 � Doen�a3
-								4 � Sem Doen�a
-								Usado apenas na opcao NEURALNET*/
-	int clinicalDataCount;	/* Numero de vezes que os dados foram obtidos*/
+    float age;        // Média da idade em anos quando os dados foram obtidos
+    float bmi;        // Valores médios do Imc- Indice Massa corporal m�dio (Kg/m2)
+    float glucose;    // Valores médios da Glicose (mg/dl)
+    float insulin;    // Valores médios da Insulina (�U/ml)
+    float mcp1;       // Valores médios da Proteina MCP-1 (pg/ml)
+    int disease_type; // Classificacao do Doente
+                               /* 1 Doença1
+                                2 Doença2
+                                3 Doença3
+                                4 Sem Doença
+                                  Usado apenas na opcao NEURALNET */
+    int clinicalDataCount; // Número de vezes que os dados foram obtidos
 
-	/* Usado apenas na opcao NEURALNET */
-	float c1;
-	float c2;
-	float c3;
-	float c4;
+    /* Usado apenas na opcao NEURALNET */
+    float c1;
+    float c2;
+    float c3;
+    float c4;
 
 } ClinicalData;
 
 
 typedef struct patient {
-	int id;						/* N�mero que identifica um paciente */
-	Date birthdate;				/* Data de nascimento*/
-	char gender;				/* G�nero (M ou F)*/
-	String hospital;			/* Nome do hospital de referencia do paciente*/
-	String district;			/* Distrito onde pertence o hospital*/
-	ClinicalData clinicalData;	/* Dados cl�nicos do doente (m�dias)*/
-} Patient;
+    int id;	                   // Número que identifica um paciente
+    Date birthdate;            // Data de nascimento
+    char gender;               // Gênero (M ou F)
+    String hospital;           // Nome do hospital de referencia do paciente
+    String district;           // Distrito onde pertence o hospital
+    ClinicalData clinicalData; // Dados cl�nicos do doente (médias)
+} PatientModel;
 
 typedef struct ClinicalDataStats {
-	float avgAge;				/* M�dia da idade em anos quando os dados foram obtidos */
-	float avgBmi;				/* Valores m�dios do Imc- Indice Massa corporal m�dio (Kg/m2) */
-	float avgGlucose;			/* Valores m�dios da Glicose (mg/dl) */
-	float avgInsulin;			/* Valores m�dios da Insulina (�U/ml) */
-	float avgMcp1;				/* Valores m�dios da Proteina MCP-1 (pg/ml)*/
-	int patientCount;		/* Numero de vezes que os dados foram obtidos*/
-}ClinicalDataStats;
+    float avgAge;     //Média da idade em anos quando os dados foram obtidos
+    float avgBmi;     //Valores médios do Imc- Indice Massa corporal m�dio (Kg/m2)
+    float avgGlucose; //Valores médios da Glicose (mg/dl)
+    float avgInsulin; //Valores médios da Insulina (�U/ml)
+    float avgMcp1;    //Valores médios da Proteina MCP-1 (pg/ml
+    int patientCount; //Numero de vezes que os dados foram obtidos
+} ClinicalDataStats;
 
 typedef struct clinicalData *PtClinicalData;
 
@@ -64,7 +63,7 @@ ID, Data Nascimento, Sexo, hospital, distrito
 Retorna:
 Paciente
 */
-Patient patientCreate(int id, Date birthdate, char gender, char *hospital, char *district);
+PatientModel Patient(int id, Date birthdate, char gender, char *hospital, char *district);
 
 /*
 Mostra os dados do paciente
@@ -73,7 +72,7 @@ patient: Estrututa do tipo Paciente
 Retorna:
  -------
 */
-void patientPrint(Patient patient);
+void patientPrint(PatientModel patient);
 
 /*
 Mostra os dados do paciente com a formata��o do norm
@@ -82,7 +81,7 @@ patient: Estrututa do tipo Paciente
 Retorna:
  -------
 */
-void patientNormPrint(Patient patient);
+void patientNormPrint(PatientModel patient);
 /*
 Construtor para os dados cl�nicos
 Recebe:

@@ -9,15 +9,6 @@ typedef struct queueImpl {
     unsigned int size;
 } QueueImpl;
 
-
-/*
-Cria uma nova inst�ncia da Queue.
-Recebe:
-initialCapacity - capacidade inicial (se aplic�vel)
-Retorno:
-refer�ncia da inst�ncia ou;
-NULL no caso de inexist�ncia de mem�ria.
-*/
 PtQueue queueCreate(unsigned int initialCapacity) {
     PtQueue newQueue = (PtQueue)malloc(sizeof(QueueImpl));
     if (newQueue == NULL)
@@ -39,14 +30,6 @@ PtQueue queueCreate(unsigned int initialCapacity) {
     return newQueue;
 }
 
-/*
-Destroi uma inst�ncia, libertando a mem�ria associada.
-Argumentos:
-ptQueue - endere�o da refer�ncia da inst�ncia;
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queueDestroy(PtQueue *ptQueue) {
     PtQueue tempQueue = *ptQueue;
     if (tempQueue == NULL) {
@@ -60,18 +43,6 @@ int queueDestroy(PtQueue *ptQueue) {
     return QUEUE_OK;
 }
 
-
-/*
-Insere um elemento numa dada inst�ncia.
-Argumentos:
-queue - refer�ncia da inst�ncia;
-elem - elemento a inserir;
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_FULL caso a fila esteja cheia, ou;
-QUEUE_NO_MEMORY caso nao haja mem�ria para guardar o elemento, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queueEnqueue(PtQueue queue, QueueElem elem) {
     if (queue == NULL) {
         return QUEUE_NULL;
@@ -95,16 +66,6 @@ int queueEnqueue(PtQueue queue, QueueElem elem) {
     return QUEUE_OK;
 }
 
-/*
-Remove um elemento numa dada inst�ncia.
-Argumentos:
-queue - refer�ncia da inst�ncia;
-ptElem - elemento removido (retorno por refer�ncia);
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_EMPTY caso a fila esteja vazia, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queueDequeue(PtQueue queue, QueueElem *ptElem) {
     if (queue == NULL) {
         return QUEUE_NULL;
@@ -126,16 +87,6 @@ int queueDequeue(PtQueue queue, QueueElem *ptElem) {
     return QUEUE_OK;
 }
 
-/*
-Espreita o elemento do in�cio numa dada inst�ncia.
-Argumentos:
-queue - refer�ncia da inst�ncia;
-ptElem - elemento no in�cio (retorno por refer�ncia);
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_EMPTY caso a fila esteja vazia, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queuePeek(PtQueue queue, QueueElem *ptElem) {
     if (queue == NULL) {
         return QUEUE_NULL;
@@ -149,53 +100,23 @@ int queuePeek(PtQueue queue, QueueElem *ptElem) {
     return QUEUE_OK;
 }
 
-/*
-Quantos elementos est�o armazenados numa inst�ncia.
-Argumentos:
-queue - refer�ncia da inst�ncia;
-ptSize - n�mero de elementos (retorno por refer�ncia);
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queueSize(PtQueue queue, int *ptSize) {
     if (queue == NULL) return QUEUE_NULL;
     *ptSize = queue->size;
     return QUEUE_OK;
 }
 
-/*
-Verifica se a inst�ncia est� vazia (n�o cont�m elementos)
-Argumentos:
-queue - refer�ncia da inst�ncia;
-Retorno:
-1 caso esteja vazia ou a refer�ncia seja NULL, ou;
-0 caso n�o esteja vazia;
-*/
 int queueIsEmpty(PtQueue queue) {
     if (queue == NULL) return 1;
     return (queue->size > 0) ? 0 : 1;
 }
 
-/*
-Limpa uma inst�ncia (remove todos os elementos)
-Argumentos:
-queue - refer�ncia da inst�ncia;
-Retorno:
-QUEUE_NULL se a refer�ncia recebida for NULL, ou;
-QUEUE_OK em caso de sucesso;
-*/
 int queueClear(PtQueue queue) {
     if (queue == NULL) return QUEUE_NULL;
     queue->size = 0;
     return QUEUE_OK;
 }
 
-/*
-Mostra informa��o sobre uma inst�ncia
-Argumentos:
-queue - refer�ncia da inst�ncia;
-*/
 void queuePrint(PtQueue queue) {
     if (queue == NULL) {
         printf("(Queue NULL) \n");

@@ -1,9 +1,9 @@
 #pragma once
 #include "../PatientStruct/patient.h"
 
-/* Defini��o do tipo de dados (exemplo para inteiros) */
-typedef Patient QueueElem;
+/* Definição do tipo de dados (exemplo para inteiros) */
+typedef PatientModel QueueElem;
 
-/* Defini��o de quaisquer outras opera��es que o tipo deve
+/* Definição de quaisquer outras operações que o tipo deve
 suportar, e.g., imprimir, comparar, etc. */
 void queueElemPrint(QueueElem elem);

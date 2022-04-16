@@ -2,15 +2,15 @@
 
 #include "../PatientStruct/patient.h"
 
-/* definicao do tipo da chave */
+/* definição do tipo da chave */
 typedef String MapKey;
 
-/* definicao do tipo do valor*/
+/* definição do tipo do valor*/
 
 typedef ClinicalDataStats MapValue;
 
 void mapKeyPrint(MapKey key);
 void mapValuePrint(MapValue value);
 
-/* funcao de comparacao de chaves */
+/* funcao de comparação de chaves */
 int mapKeyEquals(MapKey key1, MapKey key2);

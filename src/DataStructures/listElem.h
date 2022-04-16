@@ -1,7 +1,7 @@
 #pragma once
 #include "../PatientStruct/patient.h"
 
-typedef Patient ListElem;
+typedef PatientModel ListElem;
 
 void listElemPrint(ListElem elem);
 
