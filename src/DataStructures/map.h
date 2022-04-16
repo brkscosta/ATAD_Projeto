@@ -23,10 +23,10 @@ typedef struct mapImpl *PtMap;
 /*
 Cria uma nova instância da Map.
 Recebe:
-initialCapacity - capacidade inicial (se aplic�vel)
+initialCapacity - capacidade inicial (se aplicável)
 Retorno:
 referência da instância ou;
-NULL no caso de inexist�ncia de memória.
+NULL no caso de inexistência de memória.
 */
 PtMap mapCreate(unsigned int initialCapacity);
 
@@ -64,7 +64,7 @@ ptValue - valor removido (retorno por referência);
 Retorno:
 MAP_NULL se a referência recebida for NULL, ou;
 MAP_EMPTY caso o mapa esteja vazio, ou;
-MAP_UNKNOWN_KEY caso a chave n�o exista no mapa, ou;
+MAP_UNKNOWN_KEY caso a chave não exista no mapa, ou;
 MAP_OK em caso de sucesso;
 */
 int mapRemove(PtMap map, MapKey key, MapValue *ptValue);
@@ -90,7 +90,7 @@ map - referência da instância;
 key - chave do mapeamento;
 Retorno:
 1 se existir a chave;
-0 se n�o existir ou o mapa for NULL;
+0 se não existir ou o mapa for NULL;
 */
 int mapContains(PtMap map, MapKey key);
 
@@ -133,7 +133,7 @@ Argumentos:
 map - referência da instância;
 Retorno:
 1 caso esteja vazia ou a referência seja NULL, ou;
-0 caso n�o esteja vazia;
+0 caso não esteja vazia;
 */
 int mapIsEmpty(PtMap map);
 

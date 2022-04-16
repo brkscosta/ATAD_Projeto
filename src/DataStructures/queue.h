@@ -18,14 +18,14 @@ Recebe
 initialCapacity - capacidade inicial
 Retorna
 referência da instância ou
-NULL no caso de inexist�ncia de memória.
+NULL no caso de inexistência de memória.
 */
 PtQueue queueCreate(unsigned int initialCapacity);
 
 /* 
 Destroi uma instância, libertando a memória associada.
 Argumentos:
-ptQueue - endere�o da referência da instância;
+ptQueue - endereço da referência da instância;
 Retorno:
 QUEUE_NULL se a referência recebida for NULL, ou;
 QUEUE_OK em caso de sucesso;
@@ -81,7 +81,7 @@ QUEUE_OK em caso de sucesso;
 int queueSize(PtQueue queue, int *ptSize);
 
 /*
-Verifica se a instância est� vazia (n�o cont�m elementos)
+Verifica se a instância está vazia (n�o cont�m elementos)
 Argumentos:
 queue - referência da instância;
 Retorno:
