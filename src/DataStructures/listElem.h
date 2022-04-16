@@ -1,5 +1,5 @@
 #pragma once
-#include "patient.h"
+#include "../PatientStruct/patient.h"
 
 typedef Patient ListElem;
 

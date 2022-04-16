@@ -1,15 +1,15 @@
 ﻿#pragma once
 
-#include "list.h"
-#include "map.h"
-#include "queue.h"
+#include "../DataStructures/list.h"
+#include "../DataStructures/map.h"
+#include "../DataStructures/queue.h"
 
 //FUNCOES DO PROJETO
-void load(PtList *patient);
-void loadt(PtList *patient);
+void load(PtList patient);
+void loadt(PtList patient);
 void show(PtList patients);
 void clear(PtList patients);
-void sort(PtList *patients);
+void sort(PtList patients);
 void avg(PtList patients);
 void averageClinicalData(PtList patients, PtMap* map);
 void checkDistrict(PtList patients);
@@ -22,6 +22,15 @@ PtList normalizeClinicalData(PtList patients, int k);
 
 void clrscr();
 char** split(char* str, int nFields, const char *delim);
+
+/*
+Devolve o rank do paciente
+Recebe:
+lista de pacientes e o ID do paciente
+Retorno:
+Rank
+*/
+int findPatientRankById(PtList patient, int patientId);
 
 /*
 Devolve a idade do paciente
@@ -41,16 +50,6 @@ ou
 ao valor médio do intervalo entre o [min(atr),max(atr)] para cada um destes 4 atributros.
 */
 void addToQueue(PtList list, PtQueue *queue, PtClinicalDataStats max);
-
-
-/*
-Devolve o rank do paciente
-Recebe:
-lista de pacientes e o ID do paciente
-Retorno:
-Rank
-*/
-int findPatientRankById(PtList *patient, int patientId);
 
 /*
 Calcular valor medio

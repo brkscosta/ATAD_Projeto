@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 void listElemPrint(ListElem elem) {
-	patientPrint(elem);
+    patientPrint(elem);
 }
 
 void listElemNormPrint(ListElem elem) {
-	patientNormPrint(elem);
+    patientNormPrint(elem);
 }

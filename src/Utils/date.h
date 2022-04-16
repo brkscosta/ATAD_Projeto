@@ -1,4 +1,6 @@
 #pragma once
+#include <stdio.h>
+#include <string.h>
 
 typedef struct date {
 	unsigned int day, month, year;

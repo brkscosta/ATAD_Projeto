@@ -1,6 +1,6 @@
 #pragma once
 
-#include "patient.h"
+#include "../PatientStruct/patient.h"
 
 /* definicao do tipo da chave */
 typedef String MapKey;
